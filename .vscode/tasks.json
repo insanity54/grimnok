@@ -1,0 +1,34 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run devbox services",
+      "type": "shell",
+      "command": "devbox services up",
+      "problemMatcher": [],
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    }, {
+      "label": "Migrate nakama",
+      "type": "shell",
+      "command": "nakama migrate up --config ./.config/nakama.yml"
+    }, {
+      "label": "Run bun dev",
+      "type": "shell",
+      "command": "bun run build --watch",
+      "problemMatcher": [],
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    }
+  ]
+}

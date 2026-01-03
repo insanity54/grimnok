@@ -2,6 +2,19 @@
   "version": "2.0.0",
   "tasks": [
     {
+    "label": "devbox init",
+      "type": "shell",
+      "command": "devbox init",
+      "problemMatcher": [],
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
       "label": "Run devbox services",
       "type": "shell",
       "command": "devbox services up",

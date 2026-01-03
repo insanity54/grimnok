@@ -1,5 +1,5 @@
 {
-	"name": "my-svelte-app",
+	"name": "grimnak",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
@@ -41,6 +41,7 @@
 	},
 	"dependencies": {
 		"@heroiclabs/nakama-js": "^2.8.0",
+		"@types/bun": "^1.3.5",
 		"phaser": "^3.90.0",
 		"svelte-adapter-bun": "^1.0.1",
 		"uuid": "^13.0.0"

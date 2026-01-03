@@ -3,7 +3,7 @@
 import { SveltePlugin } from "bun-plugin-svelte";
 
 Bun.build({
-  entrypoints: ["src/index.ts"],
+  entrypoints: ["src/main.ts"],
   outdir: "dist",
   target: "browser",
   sourcemap: true, // sourcemaps not yet supported

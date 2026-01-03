@@ -1,23 +1,23 @@
-# grimnak
-
-# The adventures of Grimnok
+# The adventures of Grimnâk
 
 ## Project requirements
 
+* [x] [devbox](https://www.jetify.com/docs/devbox/installing-devbox)
+* [x] club penguin style movement
 * [ ] Fantasy RPG
 * [ ] Easy to update
 * [ ] Fun to play
+* [ ] Nakama multiplayer
+* [ ] Nostr auth
 * [ ] User accounts
 * [ ] Inventory
 * [ ] Monsters
 * [ ] Loot
 * [ ] General store
 * [ ] Leaderboard
-* [x] [devbox](https://www.jetify.com/docs/devbox/installing-devbox)
+* [ ] portals (travel between maps)
 * [ ] Town Square
-* [x] club penguin style movement
-* [ ] portals
-* [ ] levels
+* [ ] maps
 * [ ] Beast keeper, cron restock
 * [ ] chat
 * [ ] Home stable, beast collection view
@@ -28,6 +28,8 @@
 * [ ] fishing
 * [ ] mythic (anything)
 * [ ] void rondo
+* [ ] Sword in stone-- 1 in 1 million chance of pulling rare item
+* [ ] 
 
 
 ## Dev
@@ -48,7 +50,7 @@ Init db
 
 Create db user
 
-    createuser --interactive
+    createuser --superuser --username=nakama
 
 Create nakama db
 
@@ -59,3 +61,10 @@ Once nakama is running, go to http://localhost:7351. The default creds are admin
 ## Credits
 
 Adventurer spritesheet by rvros https://rvros.itch.io/animated-pixel-hero
+
+
+### troubleshooting
+
+    .devbox/virenv/postgresql/data" is not a database cluster directory
+
+@see https://www.danielcorin.com/til/devbox/quick-postgres-db/

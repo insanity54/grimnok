@@ -1,0 +1,180 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "originCave.tmj": {
+            "expandedObjectLayers": [
+                7,
+                8
+            ],
+            "scale": 0.75,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": -208,
+                "y": -240
+            }
+        },
+        "originCave.tmj#tiles3": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "originCave.tmj#tiles4": {
+            "scaleInDock": 1
+        },
+        "originCave.tmx": {
+            "expandedObjectLayers": [
+                7,
+                8
+            ],
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": -272,
+                "y": 16
+            }
+        },
+        "originCave.tmx#tiles3": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "originCave.tmx#tiles4": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "sharstone.tmx": {
+            "expandedObjectLayers": [
+                6,
+                7
+            ],
+            "scale": 1,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 399,
+                "y": 324
+            }
+        },
+        "sharstone.tmx#tiles4": {
+            "scaleInDock": 1
+        },
+        "sharstoneSquare.tmx": {
+            "scale": 1.5251953125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 255.70495582020752,
+                "y": 255.70495582020746
+            }
+        },
+        "sharstoneSquare.tmx#tiles4": {
+            "scaleInDock": 1
+        },
+        "sharstoneville.tmx": {
+            "expandedObjectLayers": [
+                6,
+                7
+            ],
+            "scale": 0.75,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 64,
+                "y": 457.33333333333326
+            }
+        },
+        "sharstoneville.tmx#tiles4": {
+            "scaleInDock": 1
+        },
+        "tiles3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles4.tsx": {
+            "scaleInDock": 1
+        },
+        "townSquare.json": {
+            "scale": 1.46025390625,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 275.2945897144386,
+                "y": 246.53246840098979
+            }
+        },
+        "townSquare.tmj": {
+            "expandedObjectLayers": [
+                6
+            ],
+            "scale": 1.46025390625,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 300.63264896676253,
+                "y": 260.9135290577142
+            }
+        },
+        "townSquare.tmj#tiles3": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "townSquare.tmj#tiles4": {
+            "scaleInDock": 1
+        },
+        "townSquare.tmx": {
+            "expandedObjectLayers": [
+                6,
+                7
+            ],
+            "scale": 1,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 496,
+                "y": 336
+            }
+        },
+        "townSquare.tmx#tiles3": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "townSquare.tmx#tiles4": {
+            "scaleInDock": 1
+        },
+        "townSquare.tmx#tilesEmbedded": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "/home/cj/Documents/grimnok/static/assets",
+    "last.externalTilesetPath": "/home/cj/Documents/grimnok/static/assets",
+    "last.imagePath": "/home/cj/Documents/grimnok/static/assets",
+    "last.objectTemplatePath": "/home/cj/Documents/grimnok/static/assets",
+    "last.worldFilePath": "/home/cj/Documents/grimnok/static/assets",
+    "loadedWorlds": [
+        "/home/cj/Documents/grimnok/static/assets/world1.world"
+    ],
+    "map.fixedSize": false,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.layerDataFormat": "3",
+    "openFiles": [
+    ],
+    "project": "maps.tiled-project",
+    "property.type": "string",
+    "recentFiles": [
+        "sharstone.tmx",
+        "originCave.tmx",
+        "sharstoneSquare.tmx",
+        "townSquare.tmj",
+        "originCave.tmj",
+        "townSquare.tmx",
+        "townSquare.json",
+        "tiles3.tsx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx"
+}

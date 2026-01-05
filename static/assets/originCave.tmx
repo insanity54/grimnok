@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="1" nextlayerid="9" nextobjectid="15">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="1" nextlayerid="10" nextobjectid="19">
  <editorsettings>
   <export target="originCave.tmj" format="json"/>
  </editorsettings>
@@ -9,7 +9,7 @@
  <tileset firstgid="1" name="tiles4" tilewidth="32" tileheight="32" tilecount="96" columns="8">
   <image source="tiles4.png" width="256" height="384"/>
  </tileset>
- <layer id="1" name="ground" width="30" height="20" opacity="0.72">
+ <layer id="1" name="ground" width="30" height="20">
   <data encoding="csv">
    <chunk x="-16" y="-16" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -170,15 +170,23 @@
  <objectgroup id="8" name="portals">
   <object id="12" name="stair1" gid="2147483677" x="224" y="0" width="32" height="32">
    <properties>
-    <property name="toMap" value="sharstoneville"/>
-    <property name="toPortal" value="stair1"/>
+    <property name="toMap" value="stoneville"/>
+    <property name="toPortal" value="southStair"/>
    </properties>
   </object>
   <object id="14" name="stair2" gid="2147483677" x="-224" y="-256" width="32" height="32">
    <properties>
-    <property name="toMap" value="sharstoneville"/>
+    <property name="toMap" value="stoneville"/>
     <property name="toPortal" value="stair1"/>
    </properties>
   </object>
+  <object id="15" name="spawn" gid="2" x="96" y="-32" width="32" height="32">
+   <properties>
+    <property name="hidden" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="notes">
+  <object id="18" name="nilPoint" gid="37" x="0" y="32" width="32" height="32"/>
  </objectgroup>
 </map>

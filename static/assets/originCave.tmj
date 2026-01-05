@@ -183,7 +183,7 @@
          "height":48,
          "id":1,
          "name":"ground",
-         "opacity":0.72,
+         "opacity":1,
          "startx":-16,
          "starty":-16,
          "type":"tilelayer",
@@ -250,12 +250,12 @@
                         {
                          "name":"toMap",
                          "type":"string",
-                         "value":"sharstoneville"
+                         "value":"stoneville"
                         }, 
                         {
                          "name":"toPortal",
                          "type":"string",
-                         "value":"stair1"
+                         "value":"southStair"
                         }],
                  "rotation":0,
                  "type":"",
@@ -273,7 +273,7 @@
                         {
                          "name":"toMap",
                          "type":"string",
-                         "value":"sharstoneville"
+                         "value":"stoneville"
                         }, 
                         {
                          "name":"toPortal",
@@ -286,6 +286,47 @@
                  "width":32,
                  "x":-224,
                  "y":-256
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":15,
+                 "name":"spawn",
+                 "properties":[
+                        {
+                         "name":"hidden",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":96,
+                 "y":-32
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":9,
+         "name":"notes",
+         "objects":[
+                {
+                 "gid":37,
+                 "height":32,
+                 "id":18,
+                 "name":"nilPoint",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":0,
+                 "y":32
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -293,8 +334,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":9,
- "nextobjectid":15,
+ "nextlayerid":10,
+ "nextobjectid":19,
  "orientation":"orthogonal",
  "properties":[
         {

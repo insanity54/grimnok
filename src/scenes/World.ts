@@ -2,15 +2,28 @@ import Phaser from "phaser";
 import CONFIG from '../config.ts';
 import Nakama from '../nakama.ts';
 import { generateFramesFromPixeloramaData } from "../phaserDataLoader.ts";
-import { createPlayer } from "$lib/player";
+import { spawnPlayer } from "$lib/player";
 import { getRandomElement } from "$lib/random";
 
 interface MapThing {
   groundLayer: Phaser.Tilemaps.TilemapLayer | null,
   itemsLayer: Phaser.Tilemaps.ObjectLayer | null,
   poiLayer: Phaser.Tilemaps.TilemapLayer | null,
-  portalsLayer: Phaser.Tilemaps.ObjectLayer | null
+  portalsLayer: Phaser.Tilemaps.ObjectLayer | null,
+  notesLayer: Phaser.Tilemaps.ObjectLayer | null,
 }
+
+interface ObjectProperty {
+  name: string;
+  type: string;
+  value: any;
+}
+
+
+interface ObjectWithProperties {
+  properties: ObjectProperty[]; // An array of properties
+}
+
 
 type WorldTileMap = {
   fileName: string;
@@ -27,11 +40,17 @@ type WorldConfiguration = {
 };
 
 
+export enum ItemType {
+  CREATURE,
+  BUFF,
+}
+
+
 
 
 const playerSpeed = 250;
 const tileSize = 32;
-const scaleFactor = 4;
+const scaleFactor = 1;
 const halfTileSize = (tileSize * scaleFactor) / 2;
 
 export default class World extends Phaser.Scene {
@@ -42,8 +61,11 @@ export default class World extends Phaser.Scene {
   private target: Phaser.Types.Physics.Arcade.SpriteWithStaticBody | null = null;
   private faraway: Phaser.Math.Vector2 = new Phaser.Math.Vector2(-2000, -2000);
   private isWalking: boolean;
-  private isChangingScenes: boolean = false;
-  private portals: Phaser.Types.Physics.Arcade.SpriteWithStaticBody[] = [];
+  private currentMap: string | null = null;
+  private isChangingMaps: boolean = false;
+  private portals: Phaser.Physics.Arcade.StaticGroup | null = null;
+  private fx: Phaser.GameObjects.Components.FX | null = null;
+
   private map: Phaser.Tilemaps.Tilemap | null = null;
 
 
@@ -62,13 +84,14 @@ export default class World extends Phaser.Scene {
     this.load.json('world1', '/assets/world1.world');
 
     this.load.tilemapTiledJSON('originCave', '/assets/originCave.tmj');
-    this.load.tilemapTiledJSON('sharstoneville', '/assets/sharstoneville.tmj');
+    this.load.tilemapTiledJSON('stoneville', '/assets/stoneville.tmj');
 
   }
 
   async create() {
 
-    this.isChangingScenes = false;
+
+    this.isChangingMaps = false;
 
 
 
@@ -78,7 +101,7 @@ export default class World extends Phaser.Scene {
 
 
     // this.source = this.physics.add.image(100, 300, 'groundArrows');
-    // this.distanceText = this.add.text(10, 10, 'Click to set target', { color: 'lime' });
+    this.distanceText = this.add.text(10, 10, '~', { color: 'lime' });
     this.anims.create({
       key: 'activate',
       frames: this.anims.generateFrameNumbers('groundArrows', { start: 0, end: 19 }),
@@ -130,7 +153,7 @@ export default class World extends Phaser.Scene {
       key: 'idle1',
       frames: generateFramesFromPixeloramaData('helix', 'idle1', helixSpriteData),
       frameRate: 8,
-      repeat: 2,
+      repeat: -1,
     });
 
     this.anims.create({
@@ -150,98 +173,27 @@ export default class World extends Phaser.Scene {
 
 
 
-    const { groundLayer, itemsLayer, poiLayer, portalsLayer } = this.loadMap('sharstoneville');
-
-
-    // spawn portals
-    portalsLayer?.objects.forEach((obj) => {
-
-      const x = (obj.x || 0) * scaleFactor + halfTileSize;
-      const y = (obj.y || 0) * scaleFactor - halfTileSize;
-
-      console.log(obj);
-      this.portals.push(this.physics.add.staticSprite(x, y, 'tiles4', Number(obj.gid) - 1).setScale(scaleFactor));
+    this.loadMap('originCave');
 
 
 
+    // get the spawnpoint
+    const portals = this.map?.getObjectLayer('portals');
+    // console.log(portals)
+    const spawnPoint = portals?.objects.find((portal) => portal.name == 'spawn');
+    if (!spawnPoint) throw new Error(`failed to find 'spawn' object in portals layer`);
+    this.player = spawnPlayer(this, spawnPoint.x, spawnPoint.y, scaleFactor);
+    const portalsBodies = this.portals?.getChildren().map((portal) => portal) as Phaser.GameObjects.GameObject[]
+    if (!portalsBodies) throw new Error('portalsBodies was falsy');
+    this.physics.add.overlap(this.player, portalsBodies, this.overlapCallback, undefined, this);
 
-    })
-
-    // spawn items    
-    itemsLayer?.objects.forEach((obj) => {
-      // console.log(obj)
-
-      const x = (obj.x || 0) * scaleFactor + halfTileSize;
-      const y = (obj.y || 0) * scaleFactor - halfTileSize;
-
-      if (obj.name === 'gol') {
-        // choose the gol sprite that matches the gol count
-        const count = obj.properties.find((prop: any) => prop.name === 'count').value;
-        // console.log(`spawning gol with count=${count}`)
-        this.spawnGol(x, y, count);
-
-      } else if (obj.name === 'mystery') {
-        // randomly choose an item to spawn
-        this.spawnRandomItem(x, y);
-
-      } else if (obj.name === 'map') {
-        this.physics.add.staticSprite(x, y, 'tiles4').setScale(2).setTexture('tiles4', 40)
-      } else {
-        // unknown object type
-        this.physics.add.staticSprite(x, y, 'tiles4').setScale(2).setTexture('tiles4', 52)
-      }
-
-    })
-
-
-
-    this.player = createPlayer(this, 100, 100);
 
     this.cameras.main.setZoom(1);
-    this.cameras.main.startFollow(this.player, false);
 
-    this.target = this.physics.add.staticSprite(100, 100, 'groundArrows').setAlpha(0).setScale(2);
+    this.target = this.physics.add.staticSprite(10, 10, 'groundArrows').setAlpha(0).setScale(2);
     this.target.play({ key: 'activate' });
 
-    // this.physics.add.overlap(this.player, stairs, this.overlapCallback, undefined, this);
 
-    // set up player-portal overlap handlers
-    this.portals.forEach((portal) => {
-
-      if (!this.player) throw new Error('failed to setup player-portal overlap handlers-- this.player was falsy.');
-      const overlapCallback: Phaser.Types.Physics.Arcade.ArcadePhysicsCallback = (
-        object1: Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody | Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Tilemaps.Tile,
-        object2: Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody | Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Tilemaps.Tile
-      ) => {
-        if (!this.isChangingScenes) {
-          console.log('overlapCallback!');
-          this.isChangingScenes = true;
-
-          // load the portal
-          // Load the corresponding tilemap based on the portal name
-
-          // map.destroy();
-          // @todo we need to also destroy the map's layers.
-
-
-          const { groundLayer, itemsLayer, poiLayer, portalsLayer } = this.loadMap('originCave');
-
-
-          let cave = this.add.tilemap('originCave');
-          cave.addTilesetImage('tiles4');
-
-          // const groundLayer = cave.createLayer('ground', 'tiles4');
-          // const itemsLayer = cave.getObjectLayer('items');
-          // const poiLayer = cave.createLayer('poi', 'tiles4');
-          // const portalsLayer = cave.getObjectLayer('portals');
-
-          groundLayer?.setScale(scaleFactor);
-          poiLayer?.setScale(scaleFactor);
-
-        }
-      }
-      this.physics.add.overlap(this.player, portal, overlapCallback, undefined, this);
-    })
 
 
     this.input.on('pointerup', (pointer: Phaser.Input.Pointer) => {
@@ -257,7 +209,7 @@ export default class World extends Phaser.Scene {
 
       if (this.player) {
         this.player.setVelocity(0);
-        this.player.play({ key: 'idle1' }, true);
+        this.player.play({ key: 'idle1', repeat: -1 }, true);
       }
     })
   }
@@ -265,37 +217,47 @@ export default class World extends Phaser.Scene {
   update(): void {
     this.updatePlayerMovement();
 
-
     this.updateCamera();
 
-
   }
+
 
 
   private createPortal(x: number, y: number, frame: number) {
 
   }
 
-
-
   private overlapCallback(
-    obj1: Phaser.Physics.Arcade.Body | Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Tilemaps.Tile | Phaser.Physics.Arcade.StaticBody,
-    obj2: Phaser.Physics.Arcade.Body | Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Tilemaps.Tile | Phaser.Physics.Arcade.StaticBody
+    obj1: Phaser.Types.Physics.Arcade.GameObjectWithBody,
+    obj2: Phaser.Types.Physics.Arcade.GameObjectWithBody
   ): void {
-    if (!this.isChangingScenes) {
-      console.log('overlap!');
-      this.isChangingScenes = true;
+    if (this.isChangingMaps) return;
+    console.log(`we have overlapped! ${obj1.type} (${obj1.name}), ${obj2.type} (${obj2.name})`);
 
-      const fx = this.cameras.main.postFX.addWipe();
-      this.scene.transition({
-        target: 'town-square',
-        duration: 500,
-        onUpdate: (progress: any) => {
-          fx.progress = progress;
-        }
+
+    const targetMapName = obj2.getData('toMap'); // Fetch 'toMap' property
+
+
+    if (targetMapName && targetMapName !== this.currentMap) {
+      console.log('Portal touched! Transitioning to:', targetMapName);
+      this.isChangingMaps = true;
+
+      // transition effect
+      this.cameras.main.fadeOut(500, 0, 0, 0, () => {
+        this.loadMap(targetMapName);
+        this.currentMap = targetMapName;
+        this.cameras.main.fadeIn(500, 0, 0, 0, () => {
+          this.isChangingMaps = false;  // Enable transition again
+        });
       });
+
+
+
+
     }
+
   }
+
 
 
   private setTarget(x: number, y: number): void {
@@ -354,26 +316,34 @@ export default class World extends Phaser.Scene {
 
   private loadMap(mapName: string): MapThing {
     if (this.map) {
+
+      // clean up the items from last map
+
+      // clean up the portals
+      this.portals?.clear();
+      
+
       // this.map.destroyLayer('ground');
       // this.map.destroyLayer('poi');
+      // this.map.
       // this.map.destroy();
     }
 
-    const world1Data = this.cache.json.get('world1') as WorldConfiguration;
+    // const world1Data = this.cache.json.get('world1') as WorldConfiguration;
 
-    // we load Tiled world data to find the map offset
-    const worldMapData = world1Data.maps.find((m: WorldTileMap) => m.fileName.includes(mapName));
-    console.log('loading the following world.', worldMapData);
+    // // we load Tiled world data to find the map offset
+    // const worldMapData = world1Data.maps.find((m: WorldTileMap) => m.fileName.includes(mapName));
+    console.log('loading', mapName);
 
 
     // const x = worldMapData?.x || 0;
-    const x = -300;
-    const y = worldMapData?.y || 0;
+    // // const x = -300;
+    // const y = worldMapData?.y || 0;
 
-    console.log(`x=${x}, y=${y}`);
+    // console.log(`map offset x=${x}, y=${y}`);
     this.map = this.add.tilemap(mapName);
-    this.map.addTilesetImage('tiles4', 'tiles4', tileSize, tileSize, 0, 0, 0, { x, y });
-    this.map.addTilesetImage('tiles4')
+    // this.map.addTilesetImage('tiles4', 'tiles4', tileSize, tileSize, 0, 0, 0, { x, y });
+    this.map.addTilesetImage('tiles4');
 
     // this.map.worldToTileX(x);
     // this.map.worldToTileY(y);
@@ -381,26 +351,81 @@ export default class World extends Phaser.Scene {
 
 
 
-    const groundLayer = this.map.createLayer('ground', 'tiles4', x, y);
-    const poiLayer = this.map.createLayer('poi', 'tiles4', x, y);
+
+
+    const groundLayer = this.map.createLayer('ground', 'tiles4');
+    const poiLayer = this.map.createLayer('poi', 'tiles4');
+    const notesLayer = this.map.getObjectLayer('notes');
     const itemsLayer = this.map.getObjectLayer('items');
     const portalsLayer = this.map.getObjectLayer('portals');
 
     groundLayer?.setScale(scaleFactor);
     poiLayer?.setScale(scaleFactor);
 
+
+    this.portals = this.physics.add.staticGroup();
+    // this.portals = this.physics.add.group();
+    portalsLayer?.objects.forEach((obj) => {
+      const properties = obj.properties as ObjectProperty[]; // Ensure you assert to the correct type array
+
+      // Check if the hidden property is present and its value
+      const hiddenProperty = properties.find((prop) => prop.name === 'hidden');
+
+      // If it has hidden set to true, we don't add it
+      if (hiddenProperty?.value === true) return;
+
+      // Optional: If you want to retrieve the 'count' property as well
+      const countProperty = properties.find((prop) => prop.name === 'count');
+      const count = countProperty ? countProperty.value : undefined;
+
+      // Add the object from Tiled
+      if (!this.portals) return;
+      this.addObjectFromTiled(this.portals, obj, 'tiles4', 'tiles4').setDepth(5);
+
+      
+
+
+    });
+
+
+    const notes = this.physics.add.staticGroup();
+    notesLayer?.objects.forEach((obj) => {
+      this.addObjectFromTiled(notes, obj, 'tiles4', 'tiles4');
+    })
+
+    // spawn items    
+    const items = this.physics.add.staticGroup([])
+    itemsLayer?.objects.forEach((obj) => {
+      this.addObjectFromTiled(items, obj, 'tiles4', 'tiles4');
+    })
+
+
+    // console.log('depixelating now.')
+    // this.cameras.main.fadeFrom(1500, 100, 0, 0);
+
+    // const pixelate = this.cameras.main.postFX.addPixelate(40);
+    // this.add.tween({
+    //   targets: pixelate,
+    //   duration: 1000,
+    //   amount: -1,
+    // });
+
+
     return {
       groundLayer,
       poiLayer,
       itemsLayer,
-      portalsLayer
+      portalsLayer,
+      notesLayer
     };
+
+
   }
 
-private updatePlayerMovement(): void {
+  private updatePlayerMovement(): void {
     if (!this.player || !this.target || !this.player.body) {
-        console.warn('Player or target is not defined');
-        return; // Exit early if either is not defined
+      console.warn('Player or target is not defined');
+      return; // Exit early if either is not defined
     }
 
     const body = this.player.body;
@@ -408,35 +433,67 @@ private updatePlayerMovement(): void {
     const sourceBodyCenter = new Phaser.Math.Vector2(body.position.x + halfWidth, body.position.y + (body.height / 2));
 
     const distance = Phaser.Math.Distance.BetweenPoints(sourceBodyCenter, this.target);
+    if (this.distanceText) {
+      this.distanceText.setDepth(100);
+      this.distanceText.copyPosition(this.player.body.position);
+      // this.distanceText.setText(`x:${this.player.x.toFixed(2)}, y:${this.player.y.toFixed(2)}, tileX:${this.map?.worldToTileX(this.player.x)}, tileY:${this.map?.worldToTileY(this.player.y)}`);
+      this.distanceText.setText(`currentMap=${this.currentMap}, isChangingMap=${this.isChangingMaps}`);
+    }
 
     if (body.speed > 0) {
-        // Move the player towards the target
-        // this.physics.moveToObject(this.player, this.target, playerSpeed);
 
-        // Interpolate velocity toward (0, 0), starting at 10px away
-        body.velocity.lerp(Phaser.Math.Vector2.ZERO, Phaser.Math.Clamp(1 - distance / 10, 0, 1));
 
-        // Flip the player sprite based on movement direction
-        this.player.flipX = body.velocity.x < 0;
+      // Move the player towards the target
+      // this.physics.moveToObject(this.player, this.target, playerSpeed);
 
-        // Check if close enough to stop walking
-        if (distance < 10 && body.speed < 0.1) {
-            this.isWalking = false;
-            this.player.play({ key: 'idle1', repeat: -1 });
-        } else {
-            this.isWalking = true;
-            this.player.play({ key: 'run', repeat: -1 }, true);
-        }
+      // Interpolate velocity toward (0, 0), starting at 10px away
+      body.velocity.lerp(Phaser.Math.Vector2.ZERO, Phaser.Math.Clamp(1 - distance / 10, 0, 1));
+
+      // Flip the player sprite based on movement direction
+      this.player.flipX = body.velocity.x < 0;
+
+      // Check if close enough to stop walking
+      if (distance < 10 && body.speed < 0.1) {
+        this.isWalking = false;
+        this.player.play({ key: 'idle1', repeat: -1 });
+      } else {
+        this.isWalking = true;
+        this.player.play({ key: 'run', repeat: -1 }, true);
+      }
     }
 
     // Follow the player with the camera
     this.cameras.main.startFollow(this.player, true);
-}
+  }
 
 
   private updateCamera() {
     if (!this.player) return;
     this.cameras.main.startFollow(this.player, true);
+  }
+
+  // @greets @greetz @see https://github.com/thex3family/x3-metaverse/blob/58453abefd26c1932ed83a4eac7a330aa4442219/client/src/scenes/Game.ts#L191
+  private addObjectFromTiled(
+    group: Phaser.Physics.Arcade.StaticGroup,
+    object: Phaser.Types.Tilemaps.TiledObject,
+    key: string,
+    tilesetName: string
+  ) {
+    const actualX = object.x! + object.width! * 0.5
+    const actualY = object.y! - object.height! * 0.5
+    if (!this.map) throw new Error('Cannot add object from Tiled-- this.map is falsy');
+    const tileset = this.map.getTileset(tilesetName);
+    if (!tileset) throw new Error('Cannot add Object from Tiled-- tileset is falsy.');
+    // console.log('we are adding objectFromTiled and we  have the following properties', object.properties);
+    const obj = group
+      .get(actualX, actualY, key, object.gid! - tileset.firstgid)
+      .setName(object.name)
+      .setData('toMap', object.properties?.find((prop: ObjectProperty) => prop.name === 'toMap')?.value)
+      .setData('toPortal', object.properties?.find((prop: ObjectProperty) => prop.name === 'toPortal')?.value)
+      .setDepth(actualY);
+
+    console.log(`There are ${group.getChildren().length} objects in the staticGroup`);
+    return obj
   }
 
 }

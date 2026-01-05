@@ -1,0 +1,318 @@
+{ "compressionlevel":-1,
+ "height":20,
+ "infinite":true,
+ "layers":[
+        {
+         "chunks":[
+                {
+                 "data":[19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19,
+                    20, 20, 9, 9, 8, 19, 19, 19, 20, 20, 19, 19, 19, 19, 20, 19,
+                    20, 9, 8, 8, 8, 8, 8, 8, 8, 8, 20, 19, 19, 19, 20, 19,
+                    20, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 20, 20, 19,
+                    20, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 20, 20, 19,
+                    20, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 20, 20, 19,
+                    20, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 20, 20, 19,
+                    20, 19, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 22, 20, 19,
+                    20, 20, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 18, 18, 19,
+                    20, 20, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
+                    20, 19, 8, 8, 19, 19, 19, 19, 19, 19, 20, 20, 20, 18, 18, 19,
+                    20, 19, 11, 12, 21, 19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 19,
+                    20, 15, 15, 15, 21, 19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 19,
+                    20, 15, 15, 15, 21, 19, 19, 19, 19, 19, 19, 20, 20, 20, 20, 19,
+                    19, 15, 15, 15, 21, 19, 19, 19, 19, 19, 19, 19, 19, 20, 20, 19,
+                    19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 20, 19, 19, 19, 19, 19],
+                 "height":16,
+                 "width":16,
+                 "x":0,
+                 "y":0
+                }],
+         "height":32,
+         "id":1,
+         "name":"ground",
+         "opacity":1,
+         "startx":-16,
+         "starty":-16,
+         "type":"tilelayer",
+         "visible":true,
+         "width":32,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "chunks":[
+                {
+                 "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 "height":16,
+                 "width":16,
+                 "x":0,
+                 "y":0
+                }],
+         "height":16,
+         "id":3,
+         "name":"poi",
+         "opacity":1,
+         "startx":0,
+         "starty":0,
+         "type":"tilelayer",
+         "visible":true,
+         "width":16,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":6,
+         "name":"items",
+         "objects":[
+                {
+                 "gid":54,
+                 "height":32,
+                 "id":2,
+                 "name":"mystery",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":96,
+                 "y":128
+                }, 
+                {
+                 "gid":41,
+                 "height":32,
+                 "id":4,
+                 "name":"map",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":128,
+                 "y":64
+                }, 
+                {
+                 "gid":93,
+                 "height":32,
+                 "id":5,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":32,
+                 "y":96
+                }, 
+                {
+                 "gid":67,
+                 "height":32,
+                 "id":7,
+                 "name":"gol",
+                 "properties":[
+                        {
+                         "name":"count",
+                         "type":"int",
+                         "value":2
+                        }],
+                 "rotation":0,
+                 "type":"money",
+                 "visible":true,
+                 "width":32,
+                 "x":96,
+                 "y":64
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":7,
+         "name":"portals",
+         "objects":[
+                {
+                 "gid":1,
+                 "height":32,
+                 "id":8,
+                 "name":"originCave",
+                 "properties":[
+                        {
+                         "name":"toMap",
+                         "type":"string",
+                         "value":"originCave"
+                        }, 
+                        {
+                         "name":"toPortal",
+                         "type":"string",
+                         "value":"stair2"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":64,
+                 "y":96
+                }, 
+                {
+                 "gid":2147483679,
+                 "height":32,
+                 "id":9,
+                 "name":"southStair",
+                 "properties":[
+                        {
+                         "name":"toMap",
+                         "type":"string",
+                         "value":"originCave"
+                        }, 
+                        {
+                         "name":"toPortal",
+                         "type":"string",
+                         "value":"stair1"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":64,
+                 "y":448
+                }, 
+                {
+                 "gid":28,
+                 "height":32,
+                 "id":10,
+                 "name":"eastGate",
+                 "properties":[
+                        {
+                         "name":"toMap",
+                         "type":"string",
+                         "value":"stonevilleEast"
+                        }, 
+                        {
+                         "name":"toPortal",
+                         "type":"string",
+                         "value":"arch1"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":480,
+                 "y":320
+                }, 
+                {
+                 "gid":4,
+                 "height":32,
+                 "id":11,
+                 "name":"shop",
+                 "properties":[
+                        {
+                         "name":"toMap",
+                         "type":"string",
+                         "value":"stonevilleShop"
+                        }, 
+                        {
+                         "name":"toPortal",
+                         "type":"string",
+                         "value":"door"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":352,
+                 "y":160
+                }],
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"destination",
+                 "type":"string",
+                 "value":"shop"
+                }],
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":8,
+         "name":"notes",
+         "objects":[
+                {
+                 "gid":37,
+                 "height":32,
+                 "id":13,
+                 "name":"nilPoint",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":0,
+                 "y":32
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "chunks":[],
+         "height":0,
+         "id":5,
+         "name":"foliage",
+         "opacity":1,
+         "startx":0,
+         "starty":0,
+         "type":"tilelayer",
+         "visible":true,
+         "width":0,
+         "x":0,
+         "y":0
+        }],
+ "nextlayerid":9,
+ "nextobjectid":14,
+ "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"lore",
+         "type":"string",
+         "value":"Named after an ancient sword embedded in stone in the town square. Nobody has ever been able to pull it from it's clutches.\n\nThe legend says that a mighty Gryffin crafted the sword from a shard of it's claw."
+        }],
+ "renderorder":"right-down",
+ "tiledversion":"1.11.2",
+ "tileheight":32,
+ "tilesets":[
+        {
+         "columns":8,
+         "firstgid":1,
+         "image":"tiles4.png",
+         "imageheight":384,
+         "imagewidth":256,
+         "margin":0,
+         "name":"tiles4",
+         "spacing":0,
+         "tilecount":96,
+         "tileheight":32,
+         "tilewidth":32
+        }],
+ "tilewidth":32,
+ "type":"map",
+ "version":"1.10",
+ "width":30
+}

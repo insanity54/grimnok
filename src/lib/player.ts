@@ -1,12 +1,14 @@
 import type { Scene } from "phaser";
 
-export function createPlayer(scene: Scene, x: number, y: number) {
+
+export function spawnPlayer(scene: Scene, x: number = 0, y: number = 0, scaleFactor: number = 1) {
 
     const player = scene.physics.add
-        .sprite(100, 100, 'helix')
-        .setScale(4)
+        .sprite(x, y, 'helix')
+        .setName('player')
+        .setScale(scaleFactor)
+        .setDepth(100)
         .play({ key: 'idle1' });
-
 
     return player;
 }

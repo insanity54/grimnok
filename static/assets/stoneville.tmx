@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="1" nextlayerid="8" nextobjectid="12">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="1" nextlayerid="9" nextobjectid="14">
  <editorsettings>
-  <export format="json"/>
+  <export target="stoneville.tmj" format="json"/>
  </editorsettings>
  <properties>
   <property name="lore">Named after an ancient sword embedded in stone in the town square. Nobody has ever been able to pull it from it's clutches.
@@ -72,10 +72,10 @@ The legend says that a mighty Gryffin crafted the sword from a shard of it's cla
   <object id="8" name="originCave" gid="1" x="64" y="96" width="32" height="32">
    <properties>
     <property name="toMap" value="originCave"/>
-    <property name="toPortal" value="stair1"/>
+    <property name="toPortal" value="stair2"/>
    </properties>
   </object>
-  <object id="9" name="stair1" gid="2147483679" x="64" y="448" width="32" height="32">
+  <object id="9" name="southStair" gid="2147483679" x="64" y="448" width="32" height="32">
    <properties>
     <property name="toMap" value="originCave"/>
     <property name="toPortal" value="stair1"/>
@@ -83,15 +83,19 @@ The legend says that a mighty Gryffin crafted the sword from a shard of it's cla
   </object>
   <object id="10" name="eastGate" gid="28" x="480" y="320" width="32" height="32">
    <properties>
-    <property name="toMap" value="sharstonevilleEast"/>
+    <property name="toMap" value="stonevilleEast"/>
+    <property name="toPortal" value="arch1"/>
    </properties>
   </object>
   <object id="11" name="shop" gid="4" x="352" y="160" width="32" height="32">
    <properties>
-    <property name="toMap" value="sharstonevilleShop"/>
+    <property name="toMap" value="stonevilleShop"/>
     <property name="toPortal" value="door"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup id="8" name="notes">
+  <object id="13" name="nilPoint" gid="37" x="0" y="32" width="32" height="32"/>
  </objectgroup>
  <layer id="5" name="foliage" width="0" height="0">
   <data encoding="csv"/>

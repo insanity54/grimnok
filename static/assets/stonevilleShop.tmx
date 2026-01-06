@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="31">
+ <editorsettings>
+  <export target="stonevilleShop.tmj" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" name="tiles4" tilewidth="32" tileheight="32" tilecount="136" columns="8">
+  <image source="tiles4.png" width="256" height="544"/>
+  <tile id="120">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="127">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="128">
+   <objectgroup draworder="index" id="3">
+    <object id="17" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="129">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="130">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+ </tileset>
+ <layer id="1" name="ground" width="20" height="20">
+  <data encoding="csv">
+128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,
+128,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,128,
+128,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,129,
+128,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,130,
+128,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,129,
+128,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,128,
+128,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,128,
+128,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,128,
+128,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,128,
+128,121,121,121,121,127,127,127,127,127,127,127,127,127,127,121,121,121,121,128,
+128,127,127,127,121,127,127,127,127,127,127,127,127,127,127,121,127,127,127,128,
+128,127,127,127,121,127,127,127,127,127,127,127,127,127,127,121,127,127,127,128,
+128,127,127,127,121,127,127,127,127,127,127,127,127,127,127,121,127,127,127,128,
+128,127,127,127,121,127,127,127,127,127,127,127,127,127,127,121,127,127,127,128,
+129,127,127,127,121,127,127,127,127,127,127,127,127,127,127,121,127,127,127,128,
+130,127,127,127,121,121,121,121,121,121,121,121,121,121,121,121,127,127,127,128,
+129,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,128,
+128,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,128,
+128,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,128,
+128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128
+</data>
+ </layer>
+ <objectgroup id="2" name="portals">
+  <properties>
+   <property name="toMap" value="stoneville"/>
+   <property name="toPortal" value="shop"/>
+  </properties>
+  <object id="16" name="stairDown" gid="30" x="576" y="576" width="32" height="32">
+   <properties>
+    <property name="toMap" value="stonevilleShopCellar"/>
+    <property name="toPortal" value="stairUpWest"/>
+   </properties>
+  </object>
+  <object id="20" name="door" gid="29" x="32" y="96" width="32" height="32">
+   <properties>
+    <property name="toMap" value="stoneville"/>
+    <property name="toPortal" value="shop"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="poi"/>
+ <objectgroup id="6" name="items">
+  <object id="4" name="strawberry" gid="35" x="128" y="416" width="32" height="32"/>
+  <object id="6" name="grapes" gid="36" x="128" y="448" width="32" height="32"/>
+  <object id="10" name="goldRune" gid="37" x="480" y="416" width="32" height="32"/>
+  <object id="11" name="silverRune" gid="38" x="480" y="384" width="32" height="32"/>
+  <object id="13" name="greenRune" gid="40" x="480" y="448" width="32" height="32"/>
+  <object id="21" name="healthPot" gid="25" x="416" y="512" width="32" height="32"/>
+  <object id="22" name="manaPot" gid="26" x="384" y="512" width="32" height="32"/>
+  <object id="24" name="pear" gid="94" x="128" y="384" width="32" height="32"/>
+  <object id="30" name="book" gid="65" x="352" y="512" width="32" height="32"/>
+ </objectgroup>
+</map>

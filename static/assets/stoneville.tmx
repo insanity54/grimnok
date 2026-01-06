@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="1" nextlayerid="9" nextobjectid="14">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="1" nextlayerid="10" nextobjectid="15">
  <editorsettings>
   <export target="stoneville.tmj" format="json"/>
  </editorsettings>
@@ -8,8 +8,15 @@
 
 The legend says that a mighty Gryffin crafted the sword from a shard of it's claw.</property>
  </properties>
- <tileset firstgid="1" name="tiles4" tilewidth="32" tileheight="32" tilecount="96" columns="8">
-  <image source="tiles4.png" width="256" height="384"/>
+ <tileset firstgid="1" name="tiles4" tilewidth="32" tileheight="32" tilecount="136" columns="8">
+  <image source="tiles4.png" width="256" height="544"/>
+  <tile id="23">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="1.75" y="25.875">
+     <polygon points="0,0 11.625,-25.875 17.125,-25.875 28.875,0.875 28.5,4.75 0.125,4.75"/>
+    </object>
+   </objectgroup>
+  </tile>
  </tileset>
  <layer id="1" name="ground" width="16" height="16">
   <data encoding="csv">
@@ -33,28 +40,9 @@ The legend says that a mighty Gryffin crafted the sword from a shard of it's cla
 </chunk>
   </data>
  </layer>
- <layer id="3" name="poi" width="16" height="16">
-  <data encoding="csv">
-   <chunk x="0" y="0" width="16" height="16">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,24,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</chunk>
-  </data>
- </layer>
+ <objectgroup id="9" name="poi">
+  <object id="14" name="swordInStone" gid="24" x="192" y="128" width="32" height="32"/>
+ </objectgroup>
  <objectgroup id="6" name="items">
   <object id="2" name="mystery" gid="54" x="96" y="128" width="32" height="32"/>
   <object id="4" name="map" gid="41" x="128" y="64" width="32" height="32"/>
@@ -84,7 +72,7 @@ The legend says that a mighty Gryffin crafted the sword from a shard of it's cla
   <object id="10" name="eastGate" gid="28" x="480" y="320" width="32" height="32">
    <properties>
     <property name="toMap" value="stonevilleEast"/>
-    <property name="toPortal" value="arch1"/>
+    <property name="toPortal" value="gate"/>
    </properties>
   </object>
   <object id="11" name="shop" gid="4" x="352" y="160" width="32" height="32">
@@ -97,7 +85,4 @@ The legend says that a mighty Gryffin crafted the sword from a shard of it's cla
  <objectgroup id="8" name="notes">
   <object id="13" name="nilPoint" gid="37" x="0" y="32" width="32" height="32"/>
  </objectgroup>
- <layer id="5" name="foliage" width="0" height="0">
-  <data encoding="csv"/>
- </layer>
 </map>

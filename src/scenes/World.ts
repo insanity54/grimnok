@@ -59,12 +59,12 @@ export default class World extends Phaser.Scene {
   private distanceText: Phaser.GameObjects.Text | null = null;
   private player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody | null = null;
   private target: Phaser.Types.Physics.Arcade.SpriteWithStaticBody | null = null;
-  private faraway: Phaser.Math.Vector2 = new Phaser.Math.Vector2(-2000, -2000);
   private isWalking: boolean;
   private currentMap: string | null = null;
   private isChangingMaps: boolean = false;
   private portals: Phaser.Physics.Arcade.StaticGroup | null = null;
-  private fx: Phaser.GameObjects.Components.FX | null = null;
+  private items: Phaser.Physics.Arcade.StaticGroup | null = null;
+  private pois: Phaser.Physics.Arcade.StaticGroup | null = null;
 
   private map: Phaser.Tilemaps.Tilemap | null = null;
 
@@ -85,6 +85,10 @@ export default class World extends Phaser.Scene {
 
     this.load.tilemapTiledJSON('originCave', '/assets/originCave.tmj');
     this.load.tilemapTiledJSON('stoneville', '/assets/stoneville.tmj');
+    this.load.tilemapTiledJSON('stonevilleEast', '/assets/stonevilleEast.tmj');
+    this.load.tilemapTiledJSON('stonevilleEastTunnel', '/assets/stonevilleEastTunnel.tmj');
+    this.load.tilemapTiledJSON('stonevilleShop', '/assets/stonevilleShop.tmj');
+    this.load.tilemapTiledJSON('stonevilleShopCellar', '/assets/stonevilleShopCellar.tmj');
 
   }
 
@@ -115,21 +119,6 @@ export default class World extends Phaser.Scene {
       repeat: -1,
       frameRate: 8,
     })
-
-    this.add
-      .text(CONFIG.WIDTH / 2, 70, 'The adventures of', {
-        fontFamily: 'Arial',
-        fontSize: '24px',
-      })
-      .setOrigin(0.5);
-
-    this.add
-      .text(CONFIG.WIDTH / 2, 123, 'Grimnâk', {
-        fontFamily: 'Arial',
-        fontSize: '64px',
-      })
-      .setOrigin(0.5);
-
 
 
 
@@ -171,29 +160,12 @@ export default class World extends Phaser.Scene {
     });
 
 
-
-
     this.loadMap('originCave');
-
-
-
-    // get the spawnpoint
-    const portals = this.map?.getObjectLayer('portals');
-    // console.log(portals)
-    const spawnPoint = portals?.objects.find((portal) => portal.name == 'spawn');
-    if (!spawnPoint) throw new Error(`failed to find 'spawn' object in portals layer`);
-    this.player = spawnPlayer(this, spawnPoint.x, spawnPoint.y, scaleFactor);
-    const portalsBodies = this.portals?.getChildren().map((portal) => portal) as Phaser.GameObjects.GameObject[]
-    if (!portalsBodies) throw new Error('portalsBodies was falsy');
-    this.physics.add.overlap(this.player, portalsBodies, this.overlapCallback, undefined, this);
-
 
     this.cameras.main.setZoom(1);
 
     this.target = this.physics.add.staticSprite(10, 10, 'groundArrows').setAlpha(0).setScale(2);
     this.target.play({ key: 'activate' });
-
-
 
 
     this.input.on('pointerup', (pointer: Phaser.Input.Pointer) => {
@@ -207,10 +179,8 @@ export default class World extends Phaser.Scene {
     if (!this.input.keyboard) throw new Error('this.input.keyboard is missing');
     this.input.keyboard.on('keydown-SPACE', () => {
 
-      if (this.player) {
-        this.player.setVelocity(0);
-        this.player.play({ key: 'idle1', repeat: -1 }, true);
-      }
+      this.stopPlayerMovement();
+      
     })
   }
 
@@ -222,20 +192,20 @@ export default class World extends Phaser.Scene {
   }
 
 
-
-  private createPortal(x: number, y: number, frame: number) {
-
-  }
-
   private overlapCallback(
-    obj1: Phaser.Types.Physics.Arcade.GameObjectWithBody,
-    obj2: Phaser.Types.Physics.Arcade.GameObjectWithBody
+    obj1: any,
+    obj2: any
   ): void {
-    if (this.isChangingMaps) return;
+
     console.log(`we have overlapped! ${obj1.type} (${obj1.name}), ${obj2.type} (${obj2.name})`);
+    if (this.isChangingMaps) {
+      console.log('isChangingMaps=true')
+      return;
+    }
 
 
     const targetMapName = obj2.getData('toMap'); // Fetch 'toMap' property
+    const targetPortalName = obj2.getData('toPortal');
 
 
     if (targetMapName && targetMapName !== this.currentMap) {
@@ -244,7 +214,8 @@ export default class World extends Phaser.Scene {
 
       // transition effect
       this.cameras.main.fadeOut(500, 0, 0, 0, () => {
-        this.loadMap(targetMapName);
+        this.loadMap(targetMapName, targetPortalName);
+
         this.currentMap = targetMapName;
         this.cameras.main.fadeIn(500, 0, 0, 0, () => {
           this.isChangingMaps = false;  // Enable transition again
@@ -314,18 +285,29 @@ export default class World extends Phaser.Scene {
   }
 
 
-  private loadMap(mapName: string): MapThing {
+  private loadMap(mapName: string, portalName: string = 'spawn'): MapThing {
     if (this.map) {
 
       // clean up the items from last map
 
       // clean up the portals
-      this.portals?.clear();
-      
+      if (!this.portals) throw new Error('while loading map, there were no portals!');
+      console.log('cleaning up portals');
+      // this.portals.destroy(true);
+      this.portals.clear(true, true);
 
-      // this.map.destroyLayer('ground');
+      if (!this.items) throw new Error('while loading map, this.items was falsy');
+      this.items.clear(true, true);
+
+      // if (!this.pois) throw new Error('while loading map, this.pois was falsy');
+      // this.pois.clear(true, true);
+
+
+
+
+      this.map.destroyLayer('ground');
       // this.map.destroyLayer('poi');
-      // this.map.
+      // this.map.destroyLayer('portals');
       // this.map.destroy();
     }
 
@@ -333,7 +315,7 @@ export default class World extends Phaser.Scene {
 
     // // we load Tiled world data to find the map offset
     // const worldMapData = world1Data.maps.find((m: WorldTileMap) => m.fileName.includes(mapName));
-    console.log('loading', mapName);
+    console.log('loading', mapName, 'portalName', portalName);
 
 
     // const x = worldMapData?.x || 0;
@@ -345,6 +327,8 @@ export default class World extends Phaser.Scene {
     // this.map.addTilesetImage('tiles4', 'tiles4', tileSize, tileSize, 0, 0, 0, { x, y });
     this.map.addTilesetImage('tiles4');
 
+    // this.map.createLayer()
+
     // this.map.worldToTileX(x);
     // this.map.worldToTileY(y);
 
@@ -354,19 +338,60 @@ export default class World extends Phaser.Scene {
 
 
     const groundLayer = this.map.createLayer('ground', 'tiles4');
-    const poiLayer = this.map.createLayer('poi', 'tiles4');
+    const poiLayer = this.map.getObjectLayer('poi');
     const notesLayer = this.map.getObjectLayer('notes');
     const itemsLayer = this.map.getObjectLayer('items');
     const portalsLayer = this.map.getObjectLayer('portals');
 
+
+    groundLayer?.setCollisionFromCollisionGroup();
     groundLayer?.setScale(scaleFactor);
-    poiLayer?.setScale(scaleFactor);
+
+
+
+
+
+
+    const notes = this.physics.add.staticGroup();
+    notesLayer?.objects.forEach((obj) => {
+      this.addObjectFromTiled(notes, obj, 'tiles4', 'tiles4');
+    })
+
+    // spawn items    
+    this.items = this.physics.add.staticGroup();
+    const items = this.items;
+    itemsLayer?.objects.forEach((obj) => {
+      this.addObjectFromTiled(items, obj, 'tiles4', 'tiles4');
+    });
+
+
+
+    // Spawn the player at the spawnpoint
+    const portalObjectLayer = this.map?.getObjectLayer('portals');
+    const spawnPoint = portalObjectLayer?.objects.find((portal) => portal.name == 'spawn');
+    if (!this.player) {
+      if (!spawnPoint) throw new Error(`cannot spawn player-- failed to find 'spawn' object in portals layer`);
+      this.player = spawnPlayer(this, spawnPoint.x, spawnPoint.y, scaleFactor);
+    }
+    this.stopPlayerMovement();
+
+    // If we were given a portalName, move the player to that portal
+    if (portalName) {
+      console.log(`portalName=${portalName}`)
+      const matchingPortal = portalObjectLayer?.objects.find((portal) => portal.name === portalName);
+      this.player.setPosition(Number(matchingPortal?.x) + 64, matchingPortal?.y);
+    }
+
 
 
     this.portals = this.physics.add.staticGroup();
-    // this.portals = this.physics.add.group();
-    portalsLayer?.objects.forEach((obj) => {
+    portalObjectLayer?.objects.forEach((obj) => {
       const properties = obj.properties as ObjectProperty[]; // Ensure you assert to the correct type array
+
+      // if (properties.find((prop) => prop.name === 'spawn')) {
+      // @todo move teh spawn handling here so we can do less looping???
+      //   spawnPoint = 
+      // }
 
       // Check if the hidden property is present and its value
       const hiddenProperty = properties.find((prop) => prop.name === 'hidden');
@@ -380,35 +405,10 @@ export default class World extends Phaser.Scene {
 
       // Add the object from Tiled
       if (!this.portals) return;
+      console.log('adding portals')
       this.addObjectFromTiled(this.portals, obj, 'tiles4', 'tiles4').setDepth(5);
-
-      
-
-
     });
-
-
-    const notes = this.physics.add.staticGroup();
-    notesLayer?.objects.forEach((obj) => {
-      this.addObjectFromTiled(notes, obj, 'tiles4', 'tiles4');
-    })
-
-    // spawn items    
-    const items = this.physics.add.staticGroup([])
-    itemsLayer?.objects.forEach((obj) => {
-      this.addObjectFromTiled(items, obj, 'tiles4', 'tiles4');
-    })
-
-
-    // console.log('depixelating now.')
-    // this.cameras.main.fadeFrom(1500, 100, 0, 0);
-
-    // const pixelate = this.cameras.main.postFX.addPixelate(40);
-    // this.add.tween({
-    //   targets: pixelate,
-    //   duration: 1000,
-    //   amount: -1,
-    // });
+    this.physics.add.overlap(this.player, this.portals, this.overlapCallback, undefined, this);
 
 
     return {
@@ -472,6 +472,15 @@ export default class World extends Phaser.Scene {
     this.cameras.main.startFollow(this.player, true);
   }
 
+  private stopPlayerMovement() {
+
+    if (this.player) {
+      console.log('stopping player movement');
+      this.player.setVelocity(0);
+      this.player.play({ key: 'idle1', repeat: -1 }, true);
+    }
+  }
+
   // @greets @greetz @see https://github.com/thex3family/x3-metaverse/blob/58453abefd26c1932ed83a4eac7a330aa4442219/client/src/scenes/Game.ts#L191
   private addObjectFromTiled(
     group: Phaser.Physics.Arcade.StaticGroup,
@@ -492,7 +501,7 @@ export default class World extends Phaser.Scene {
       .setData('toPortal', object.properties?.find((prop: ObjectProperty) => prop.name === 'toPortal')?.value)
       .setDepth(actualY);
 
-    console.log(`There are ${group.getChildren().length} objects in the staticGroup`);
+    // console.log(`There are ${group.getChildren().length} objects in the staticGroup`);
     return obj
   }
 

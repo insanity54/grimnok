@@ -63,6 +63,7 @@
   * [ ] Receive Sats for player bought house
   * [ ] Receive Sats for Gol purchases
   * [ ] Receive Sats for beast purchases
+* [ ] Community goal object which lets players burn Gol to advance towards co-op success
 
 
 ## Dev

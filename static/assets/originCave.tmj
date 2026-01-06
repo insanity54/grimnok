@@ -278,7 +278,7 @@
                         {
                          "name":"toPortal",
                          "type":"string",
-                         "value":"stair1"
+                         "value":"southStair"
                         }],
                  "rotation":0,
                  "type":"",
@@ -351,12 +351,12 @@
          "columns":8,
          "firstgid":1,
          "image":"tiles4.png",
-         "imageheight":384,
+         "imageheight":544,
          "imagewidth":256,
          "margin":0,
          "name":"tiles4",
          "spacing":0,
-         "tilecount":96,
+         "tilecount":136,
          "tileheight":32,
          "tilewidth":32
         }],

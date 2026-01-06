@@ -6,8 +6,8 @@
  <properties>
   <property name="lore" value="A dark, damp cave."/>
  </properties>
- <tileset firstgid="1" name="tiles4" tilewidth="32" tileheight="32" tilecount="96" columns="8">
-  <image source="tiles4.png" width="256" height="384"/>
+ <tileset firstgid="1" name="tiles4" tilewidth="32" tileheight="32" tilecount="136" columns="8">
+  <image source="tiles4.png" width="256" height="544"/>
  </tileset>
  <layer id="1" name="ground" width="30" height="20">
   <data encoding="csv">
@@ -177,7 +177,7 @@
   <object id="14" name="stair2" gid="2147483677" x="-224" y="-256" width="32" height="32">
    <properties>
     <property name="toMap" value="stoneville"/>
-    <property name="toPortal" value="stair1"/>
+    <property name="toPortal" value="southStair"/>
    </properties>
   </object>
   <object id="15" name="spawn" gid="2" x="96" y="-32" width="32" height="32">

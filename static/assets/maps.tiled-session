@@ -35,15 +35,16 @@
         },
         "originCave.tmx": {
             "expandedObjectLayers": [
+                11,
                 9,
-                7,
-                8
+                8,
+                7
             ],
-            "scale": 1,
-            "selectedLayer": 3,
+            "scale": 0.75,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": -238,
-                "y": -61
+                "x": 479.33333333333326,
+                "y": -14.666666666666742
             }
         },
         "originCave.tmx#tiles3": {
@@ -97,14 +98,15 @@
         },
         "stoneville.tmx": {
             "expandedObjectLayers": [
-                7,
-                8
+                10,
+                8,
+                7
             ],
-            "scale": 0.75,
+            "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 509.3333333333333,
-                "y": 383.99999999999994
+                "x": 261.5,
+                "y": 247
             }
         },
         "stoneville.tmx#tiles4": {
@@ -112,13 +114,14 @@
         },
         "stonevilleEast.tmx": {
             "expandedObjectLayers": [
-                2
+                2,
+                4
             ],
             "scale": 1,
-            "selectedLayer": 1,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 432,
-                "y": 464
+                "x": -566.5,
+                "y": -46
             }
         },
         "stonevilleEast.tmx#tiles4": {
@@ -143,15 +146,16 @@
         },
         "stonevilleShop.tmx": {
             "expandedObjectLayers": [
+                8,
                 6,
-                2,
-                5
+                5,
+                2
             ],
-            "scale": 1.5,
-            "selectedLayer": 1,
+            "scale": 1,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 541.3333333333333,
-                "y": 547.3333333333334
+                "x": 341.5,
+                "y": 314
             }
         },
         "stonevilleShop.tmx#tiles4": {
@@ -160,14 +164,15 @@
         },
         "stonevilleShopCellar.tmx": {
             "expandedObjectLayers": [
-                4,
-                3
+                3,
+                5,
+                4
             ],
-            "scale": 0.75,
-            "selectedLayer": 1,
+            "scale": 2,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 16,
-                "y": 48
+                "x": 166.75,
+                "y": 73
             }
         },
         "stonevilleShopCellar.tmx#tiles4": {

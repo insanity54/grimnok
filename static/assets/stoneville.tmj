@@ -26,15 +26,15 @@
                  "x":0,
                  "y":0
                 }],
-         "height":32,
+         "height":16,
          "id":1,
          "name":"ground",
          "opacity":1,
-         "startx":-16,
-         "starty":-16,
+         "startx":0,
+         "starty":0,
          "type":"tilelayer",
          "visible":true,
-         "width":32,
+         "width":16,
          "x":0,
          "y":0
         }, 
@@ -237,6 +237,28 @@
         }, 
         {
          "draworder":"topdown",
+         "id":10,
+         "name":"navmesh",
+         "objects":[
+                {
+                 "height":512,
+                 "id":15,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":512,
+                 "x":0,
+                 "y":0
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":8,
          "name":"notes",
          "objects":[
@@ -258,8 +280,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":10,
- "nextobjectid":15,
+ "nextlayerid":11,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "properties":[
         {

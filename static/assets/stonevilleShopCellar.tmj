@@ -1,20 +1,22 @@
 { "compressionlevel":-1,
- "height":5,
+ "height":7,
  "infinite":false,
  "layers":[
         {
-         "data":[17, 17, 17, 17, 17,
-            14, 17, 17, 16, 14,
-            16, 16, 14, 17, 17,
-            16, 121, 121, 121, 17,
-            16, 16, 16, 16, 14],
-         "height":5,
+         "data":[128, 128, 128, 128, 128, 128, 128,
+            128, 17, 17, 17, 17, 17, 128,
+            128, 14, 17, 17, 16, 14, 128,
+            128, 16, 16, 14, 17, 17, 128,
+            128, 16, 121, 121, 121, 17, 128,
+            128, 16, 16, 16, 16, 14, 128,
+            128, 128, 128, 128, 128, 128, 128],
+         "height":7,
          "id":2,
          "name":"ground",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
-         "width":5,
+         "width":7,
          "x":0,
          "y":0
         }, 
@@ -43,8 +45,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":0,
-                 "y":32
+                 "x":32,
+                 "y":64
                 }, 
                 {
                  "gid":1073741853,
@@ -66,8 +68,63 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":128,
+                 "x":160,
+                 "y":64
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":5,
+         "name":"navmesh",
+         "objects":[
+                {
+                 "height":96,
+                 "id":7,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":160,
+                 "x":32,
                  "y":32
+                }, 
+                {
+                 "height":32,
+                 "id":8,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":32,
+                 "y":128
+                }, 
+                {
+                 "height":32,
+                 "id":9,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":160,
+                 "x":32,
+                 "y":160
+                }, 
+                {
+                 "height":32,
+                 "id":10,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":160,
+                 "y":128
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -95,8 +152,8 @@
                  "type":"money",
                  "visible":true,
                  "width":32,
-                 "x":64,
-                 "y":128
+                 "x":96,
+                 "y":160
                 }, 
                 {
                  "gid":75,
@@ -113,8 +170,8 @@
                  "type":"money",
                  "visible":true,
                  "width":32,
-                 "x":96,
-                 "y":128
+                 "x":128,
+                 "y":160
                 }, 
                 {
                  "gid":93,
@@ -125,8 +182,8 @@
                  "type":"food",
                  "visible":true,
                  "width":32,
-                 "x":32,
-                 "y":128
+                 "x":64,
+                 "y":160
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -134,8 +191,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":5,
- "nextobjectid":7,
+ "nextlayerid":6,
+ "nextobjectid":11,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -157,5 +214,5 @@
  "tilewidth":32,
  "type":"map",
  "version":"1.10",
- "width":5
+ "width":7
 }

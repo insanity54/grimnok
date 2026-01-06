@@ -2,16 +2,10 @@ import Phaser from "phaser";
 import CONFIG from '../config.ts';
 import Nakama from '../nakama.ts';
 import { generateFramesFromPixeloramaData } from "../phaserDataLoader.ts";
-import { spawnPlayer } from "$lib/player";
 import { getRandomElement } from "$lib/random";
+import PlayerSprite from "../game-objects/player.ts";
+import IntentStack from "$lib/IntentStack";
 
-interface MapThing {
-  groundLayer: Phaser.Tilemaps.TilemapLayer | null,
-  itemsLayer: Phaser.Tilemaps.ObjectLayer | null,
-  poiLayer: Phaser.Tilemaps.TilemapLayer | null,
-  portalsLayer: Phaser.Tilemaps.ObjectLayer | null,
-  notesLayer: Phaser.Tilemaps.ObjectLayer | null,
-}
 
 interface ObjectProperty {
   name: string;
@@ -57,7 +51,6 @@ export default class World extends Phaser.Scene {
 
 
   private distanceText: Phaser.GameObjects.Text | null = null;
-  private player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody | null = null;
   private target: Phaser.Types.Physics.Arcade.SpriteWithStaticBody | null = null;
   private isWalking: boolean;
   private currentMap: string | null = null;
@@ -65,6 +58,8 @@ export default class World extends Phaser.Scene {
   private portals: Phaser.Physics.Arcade.StaticGroup | null = null;
   private items: Phaser.Physics.Arcade.StaticGroup | null = null;
   private pois: Phaser.Physics.Arcade.StaticGroup | null = null;
+  private player: PlayerSprite | null = null;
+  private intents: IntentStack| null = null;
 
   private map: Phaser.Tilemaps.Tilemap | null = null;
 
@@ -94,6 +89,7 @@ export default class World extends Phaser.Scene {
 
   async create() {
 
+    this.intents = new IntentStack();
 
     this.isChangingMaps = false;
 
@@ -179,15 +175,20 @@ export default class World extends Phaser.Scene {
     if (!this.input.keyboard) throw new Error('this.input.keyboard is missing');
     this.input.keyboard.on('keydown-SPACE', () => {
 
-      this.stopPlayerMovement();
       
+      // this.stopPlayerMovement();
+
     })
   }
 
   update(): void {
-    this.updatePlayerMovement();
+    // this.updatePlayerMovement();
 
     this.updateCamera();
+
+    if (this.intents) {
+      this.intents.checkTopIntent();
+    }
 
   }
 
@@ -197,12 +198,19 @@ export default class World extends Phaser.Scene {
     obj2: any
   ): void {
 
+    console.log('@TODO overlap. Replace this with an intent handler.');
+    return;
+
     console.log(`we have overlapped! ${obj1.type} (${obj1.name}), ${obj2.type} (${obj2.name})`);
     if (this.isChangingMaps) {
       console.log('isChangingMaps=true')
       return;
     }
 
+    // if (!this.isWalking) {
+    //   console.log('the player is walking so we do not teleport.');
+    //   return;
+    // }
 
     const targetMapName = obj2.getData('toMap'); // Fetch 'toMap' property
     const targetPortalName = obj2.getData('toPortal');
@@ -218,13 +226,9 @@ export default class World extends Phaser.Scene {
 
         this.currentMap = targetMapName;
         this.cameras.main.fadeIn(500, 0, 0, 0, () => {
-          this.isChangingMaps = false;  // Enable transition again
+          setTimeout(() => this.isChangingMaps = false, 750);
         });
       });
-
-
-
-
     }
 
   }
@@ -236,12 +240,14 @@ export default class World extends Phaser.Scene {
     this.target.setPosition(x, y);
     this.target.body.position.set(x, y);
     this.isWalking = true;
+
+
     this.player.play({ key: 'run', repeat: -1 }, true);
 
-    this.target.play({ key: 'activate' });
-    this.target.setAlpha(1);
+    this.target.play({ key: 'activate' }).setAlpha(1).setDepth(10);
+
     // this.distanceText.setText(`Target set: (${x}, ${y})`);
-    this.physics.moveToObject(this.player, this.target, playerSpeed);
+    // this.physics.moveToObject(this.player, this.target, playerSpeed);
   }
 
 
@@ -285,7 +291,7 @@ export default class World extends Phaser.Scene {
   }
 
 
-  private loadMap(mapName: string, portalName: string = 'spawn'): MapThing {
+  private loadMap(mapName: string, portalName: string = 'spawn'): void {
     if (this.map) {
 
       // clean up the items from last map
@@ -311,6 +317,8 @@ export default class World extends Phaser.Scene {
       // this.map.destroy();
     }
 
+
+
     // const world1Data = this.cache.json.get('world1') as WorldConfiguration;
 
     // // we load Tiled world data to find the map offset
@@ -335,22 +343,88 @@ export default class World extends Phaser.Scene {
 
 
 
-
-
     const groundLayer = this.map.createLayer('ground', 'tiles4');
     const poiLayer = this.map.getObjectLayer('poi');
     const notesLayer = this.map.getObjectLayer('notes');
     const itemsLayer = this.map.getObjectLayer('items');
     const portalsLayer = this.map.getObjectLayer('portals');
+    const wallLayer = this.map.createLayer("walls", 'tiles4');
 
 
     groundLayer?.setCollisionFromCollisionGroup();
     groundLayer?.setScale(scaleFactor);
 
+    const style = {
+      font: "22px Josefin Sans",
+      fill: "#ff0044",
+      padding: { x: 20, y: 10 },
+      backgroundColor: "#fff",
+    };
+    const uiTextLines = [
+      "Click to find a path!",
+      "Is mouse inside navmesh: false",
+      "Press 'm' to see navmesh.",
+    ];
+    const uiText = this.add.text(10, 5, uiTextLines, style).setAlpha(0.9);
+
+    
+    // setup navmesh
+    // this.navMeshPlugin.buildMeshFromTilemap('navmesh1', )
+    const navMeshLayer = this.map.getObjectLayer("navmesh");
+    const navMesh = this.navMeshPlugin.buildMeshFromTiled("mesh1", navMeshLayer);
+
+    // Game object that can follow a path (inherits from Phaser.Sprite)
+    this.player = new PlayerSprite(this, 50, 200, navMesh);
+
+    // Display whether the mouse is currently over a valid point in the navmesh
+    this.input.on(Phaser.Input.Events.POINTER_MOVE, (pointer: Phaser.Input.Pointer) => {
+      const isInMesh = navMesh.isPointInMesh(pointer);
+      uiTextLines[1] = `Is mouse inside navmesh: ${isInMesh ? "yes" : "no "}`;
+      uiText.setText(uiTextLines);
+    });
 
 
+    // Toggle the navmesh visibility on/off
+    if (!this.input.keyboard) throw new Error('this.input.keyboard is falsy');
+    this.input.keyboard.on("keydown-M", () => {
+      navMesh.debugDrawClear();
+      navMesh.debugDrawMesh({
+        drawCentroid: true,
+        drawBounds: false,
+        drawNeighbors: false,
+        drawPortals: true,
+      });
+    });
 
+    // On click
+    this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
+      if (!this.player) return;
+      const worldPoint = this.cameras.main.getWorldPoint(pointer.x, pointer.y);
+      const start = new Phaser.Math.Vector2(this.player.x, this.player.y);
+      const end = new Phaser.Math.Vector2(worldPoint.x, worldPoint.y);
 
+      // Tell the follower sprite to find its path to the target
+      this.player.goTo(end);
+
+      // For demo purposes, let's recalculate the path here and draw it on the screen
+      const startTime = performance.now();
+      const path = navMesh.findPath(start, end);
+      // -> path is now an array of points, or null if no valid path found
+      const pathTime = performance.now() - startTime;
+
+      navMesh.debugDrawClear();
+      navMesh.debugDrawPath(path, 0xffd900);
+
+      const formattedTime = pathTime.toFixed(3);
+      uiTextLines[0] = path
+        ? `Path found in: ${formattedTime}ms`
+        : `No path found (${formattedTime}ms)`;
+      uiText.setText(uiTextLines);
+    });
+
+    // Graphics overlay for visualizing path
+    const graphics = this.add.graphics().setAlpha(0.5);
+    navMesh.enableDebug(graphics);
 
     const notes = this.physics.add.staticGroup();
     notesLayer?.objects.forEach((obj) => {
@@ -371,15 +445,15 @@ export default class World extends Phaser.Scene {
     const spawnPoint = portalObjectLayer?.objects.find((portal) => portal.name == 'spawn');
     if (!this.player) {
       if (!spawnPoint) throw new Error(`cannot spawn player-- failed to find 'spawn' object in portals layer`);
-      this.player = spawnPlayer(this, spawnPoint.x, spawnPoint.y, scaleFactor);
+      // this.player = spawnPlayer(this, spawnPoint.x, spawnPoint.y, scaleFactor);
     }
-    this.stopPlayerMovement();
+    this.player.stopMovement();
 
     // If we were given a portalName, move the player to that portal
     if (portalName) {
-      console.log(`portalName=${portalName}`)
+      console.log(`portalName=${portalName}`);
       const matchingPortal = portalObjectLayer?.objects.find((portal) => portal.name === portalName);
-      this.player.setPosition(Number(matchingPortal?.x) + 64, matchingPortal?.y);
+      this.player.setPosition(Number(matchingPortal?.x), matchingPortal?.y);
     }
 
 
@@ -406,80 +480,49 @@ export default class World extends Phaser.Scene {
       // Add the object from Tiled
       if (!this.portals) return;
       console.log('adding portals')
-      this.addObjectFromTiled(this.portals, obj, 'tiles4', 'tiles4').setDepth(5);
+      const sprite = this.addObjectFromTiled(this.portals, obj, 'tiles4', 'tiles4').setDepth(5);
+
+      // click handler
+      // Add event listener for pointer down (click)
+      console.log(`sprite?`, sprite);
+      sprite.setInteractive();
+      sprite.on('pointerdown', (s: Phaser.GameObjects.Sprite) => {
+          
+          this.intents?.pushIntent({ 
+            action: () => {
+              const toMap = sprite.data.get('toMap');
+              const toPortal = sprite.data.get('toPortal');
+              console.log(`Sprite ${sprite.name} clicked! Motherfucker!`)
+              this.loadMap(toMap, toPortal);
+            },
+            satisfiable: () => {
+              if (!this.player) return false;
+              return Phaser.Math.Distance.Between(this.player.x, this.player.y, sprite.x, sprite.y) < 33;
+            }
+          })
+          // Call any action you want here
+      });
+
     });
-    this.physics.add.overlap(this.player, this.portals, this.overlapCallback, undefined, this);
+    // this.physics.add.overlap(this.player, this.portals, this.overlapCallback, undefined, this);
 
 
-    return {
-      groundLayer,
-      poiLayer,
-      itemsLayer,
-      portalsLayer,
-      notesLayer
-    };
+
+
+    return
 
 
   }
 
-  private updatePlayerMovement(): void {
-    if (!this.player || !this.target || !this.player.body) {
-      console.warn('Player or target is not defined');
-      return; // Exit early if either is not defined
-    }
-
-    const body = this.player.body;
-    const halfWidth = body.width / 2;
-    const sourceBodyCenter = new Phaser.Math.Vector2(body.position.x + halfWidth, body.position.y + (body.height / 2));
-
-    const distance = Phaser.Math.Distance.BetweenPoints(sourceBodyCenter, this.target);
-    if (this.distanceText) {
-      this.distanceText.setDepth(100);
-      this.distanceText.copyPosition(this.player.body.position);
-      // this.distanceText.setText(`x:${this.player.x.toFixed(2)}, y:${this.player.y.toFixed(2)}, tileX:${this.map?.worldToTileX(this.player.x)}, tileY:${this.map?.worldToTileY(this.player.y)}`);
-      this.distanceText.setText(`currentMap=${this.currentMap}, isChangingMap=${this.isChangingMaps}`);
-    }
-
-    if (body.speed > 0) {
-
-
-      // Move the player towards the target
-      // this.physics.moveToObject(this.player, this.target, playerSpeed);
-
-      // Interpolate velocity toward (0, 0), starting at 10px away
-      body.velocity.lerp(Phaser.Math.Vector2.ZERO, Phaser.Math.Clamp(1 - distance / 10, 0, 1));
-
-      // Flip the player sprite based on movement direction
-      this.player.flipX = body.velocity.x < 0;
-
-      // Check if close enough to stop walking
-      if (distance < 10 && body.speed < 0.1) {
-        this.isWalking = false;
-        this.player.play({ key: 'idle1', repeat: -1 });
-      } else {
-        this.isWalking = true;
-        this.player.play({ key: 'run', repeat: -1 }, true);
-      }
-    }
-
-    // Follow the player with the camera
-    this.cameras.main.startFollow(this.player, true);
-  }
 
 
   private updateCamera() {
     if (!this.player) return;
+
+    // this.cameras.main.startFollow(this.player, true);
     this.cameras.main.startFollow(this.player, true);
   }
 
-  private stopPlayerMovement() {
-
-    if (this.player) {
-      console.log('stopping player movement');
-      this.player.setVelocity(0);
-      this.player.play({ key: 'idle1', repeat: -1 }, true);
-    }
-  }
 
   // @greets @greetz @see https://github.com/thex3family/x3-metaverse/blob/58453abefd26c1932ed83a4eac7a330aa4442219/client/src/scenes/Game.ts#L191
   private addObjectFromTiled(
@@ -487,7 +530,7 @@ export default class World extends Phaser.Scene {
     object: Phaser.Types.Tilemaps.TiledObject,
     key: string,
     tilesetName: string
-  ) {
+  ): Phaser.GameObjects.Sprite {
     const actualX = object.x! + object.width! * 0.5
     const actualY = object.y! - object.height! * 0.5
     if (!this.map) throw new Error('Cannot add object from Tiled-- this.map is falsy');
@@ -499,9 +542,10 @@ export default class World extends Phaser.Scene {
       .setName(object.name)
       .setData('toMap', object.properties?.find((prop: ObjectProperty) => prop.name === 'toMap')?.value)
       .setData('toPortal', object.properties?.find((prop: ObjectProperty) => prop.name === 'toPortal')?.value)
-      .setDepth(actualY);
+      .setDepth(actualY) as Phaser.GameObjects.Sprite;
 
     // console.log(`There are ${group.getChildren().length} objects in the staticGroup`);
+    // console.log(`the obj we are returning is `, obj);
     return obj
   }
 

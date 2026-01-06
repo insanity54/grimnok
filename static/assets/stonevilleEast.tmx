@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="1" nextlayerid="5" nextobjectid="12">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="1" nextlayerid="5" nextobjectid="13">
  <editorsettings>
   <export target="stonevilleEast.tmj" format="json"/>
  </editorsettings>
@@ -55,7 +55,7 @@
    </wangset>
   </wangsets>
  </tileset>
- <layer id="1" name="ground" width="30" height="20">
+ <layer id="1" name="ground" width="30" height="20" visible="0">
   <data encoding="csv">
    <chunk x="-16" y="-16" width="16" height="16">
 0,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,
@@ -131,7 +131,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="3" name="walls" width="30" height="20">
+ <layer id="3" name="walls" width="30" height="20" visible="0">
   <data encoding="csv">
    <chunk x="-16" y="-16" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -179,6 +179,7 @@
   <object id="9" x="240" y="-512" width="272" height="1024"/>
   <object id="10" x="-480" y="-512" width="32" height="96"/>
   <object id="11" x="-480" y="96" width="32" height="416"/>
+  <object id="12" x="-480" y="-128" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="2" name="portals">
   <object id="1" name="gate" gid="27" x="-480" y="-96" width="32" height="32">

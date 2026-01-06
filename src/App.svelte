@@ -5,7 +5,7 @@
 	import World from './scenes/World';
 	import CONFIG from './config';
 	import Phaser from 'phaser';
-	import { PhaserNavMeshPlugin } from "phaser-navmesh";
+	import { PhaserNavMeshPlugin } from "phaser-navmesh/src";
 
 	const phaserConfig = {
 		type: Phaser.AUTO,

@@ -5,11 +5,6 @@
  </editorsettings>
  <tileset firstgid="1" name="tiles4" tilewidth="32" tileheight="32" tilecount="136" columns="8">
   <image source="tiles4.png" width="256" height="544"/>
-  <tile id="120">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0" y="0" width="32" height="32"/>
-   </objectgroup>
-  </tile>
   <tile id="127">
    <objectgroup draworder="index" id="2">
     <object id="1" x="0" y="0" width="32" height="32"/>
@@ -55,7 +50,7 @@
 128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128
 </data>
  </layer>
- <objectgroup id="2" name="portals">
+ <objectgroup id="2" name="portals" visible="0">
   <properties>
    <property name="toMap" value="stoneville"/>
    <property name="toPortal" value="shop"/>
@@ -73,15 +68,15 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="8" name="navmesh">
+ <objectgroup id="8" name="navmesh" visible="0">
   <object id="31" x="32" y="32" width="576" height="256"/>
   <object id="32" x="160" y="288" width="320" height="192"/>
   <object id="33" x="32" y="320" width="96" height="288"/>
   <object id="34" x="512" y="320" width="96" height="288"/>
   <object id="35" x="128" y="512" width="384" height="96"/>
  </objectgroup>
- <objectgroup id="5" name="poi"/>
- <objectgroup id="6" name="items">
+ <objectgroup id="5" name="poi" visible="0"/>
+ <objectgroup id="6" name="items" visible="0">
   <object id="4" name="strawberry" gid="35" x="128" y="416" width="32" height="32"/>
   <object id="6" name="grapes" gid="36" x="128" y="448" width="32" height="32"/>
   <object id="10" name="goldRune" gid="37" x="480" y="416" width="32" height="32"/>

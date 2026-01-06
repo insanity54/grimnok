@@ -1,11 +1,12 @@
 import Phaser from "phaser";
+import type { PhaserNavMesh } from "phaser-navmesh/src";
 
 const map = (value: number, min: number, max: number, newMin: number, newMax: number): number => {
   return ((value - min) / (max - min)) * (newMax - newMin) + newMin;
 };
 
 class PlayerSprite extends Phaser.GameObjects.Sprite {
-  private navMesh: any; // Define a more specific type if possible
+  private navMesh: PhaserNavMesh; // Define a more specific type if possible
   private path: Phaser.Math.Vector2[] | null;
   private currentTarget: Phaser.Math.Vector2 | null;
   public scene: Phaser.Scene;
@@ -27,28 +28,42 @@ class PlayerSprite extends Phaser.GameObjects.Sprite {
 
     this
       .setName('player')
+      .setDepth(100)
       .play({ key: 'idle1' });
 
   }
 
+
+  updateNavMesh(navMesh: PhaserNavMesh) {
+    this.navMesh = navMesh;
+  }
+
   goTo(targetPoint: Phaser.Math.Vector2): void {
-    // Find a path to the target
-    this.path = this.navMesh.findPath(new Phaser.Math.Vector2(this.x, this.y), targetPoint);
+
+
+    // Assuming this.path should be a Vector2[]
+    const pointPath: Phaser.Geom.Point[] | null = this.navMesh.findPath(new Phaser.Math.Vector2(this.x, this.y), targetPoint);
+
+    // Convert the Point array to Vector2 array
+    this.path = pointPath ? pointPath.map(point => new Phaser.Math.Vector2(point.x, point.y)) : null;
+
+    // // Find a path to the target
+    // this.path = this.navMesh.findPath(new Phaser.Math.Vector2(this.x, this.y), targetPoint);
 
     // If there is a valid path, grab the first point from the path and set it as the target
     if (this.path && this.path.length > 0) this.currentTarget = this.path.shift() || null;
     else this.currentTarget = null;
   }
 
-  create() {
-        //     .sprite(x, y, 'helix')
-        // .setName('player')
-        // .setScale(scaleFactor)
-        // .setDepth(100)
-        // .play({ key: 'idle1' });
-  }
+  // create() {
+  //       //     .sprite(x, y, 'helix')
+  //       // .setName('player')
+  //       // .setScale(scaleFactor)
+  //       // .setDepth(100)
+  //       // .play({ key: 'idle1' });
+  // }
 
-  update(time: number, deltaTime: number): void {
+  update(_time: number, deltaTime: number): void {
     // Bugfix: Phaser's event emitter caches listeners, so it's possible to get updated once after
     // being destroyed
     if (!this.body) return;
@@ -109,6 +124,9 @@ class PlayerSprite extends Phaser.GameObjects.Sprite {
 
   stopMovement(): void {
     this.play({ key: 'idle1', repeat: -1 }, true);
+    this.currentTarget = null;
+    // const body = this.body as Phaser.Physics.Arcade.Body;
+    // body.setVelocity(0);
   }
 
   destroy(): void {

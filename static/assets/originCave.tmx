@@ -277,7 +277,7 @@
   <object id="47" x="736" y="-128" width="64" height="480"/>
   <object id="48" x="448" y="-192" width="160" height="608"/>
   <object id="49" x="256" y="-160" width="96" height="320"/>
-  <object id="51" x="-64" y="192" width="160" height="288"/>
+  <object id="51" x="-64" y="192" width="160" height="224"/>
   <object id="55" x="-224" y="-352" width="64" height="544"/>
   <object id="57" x="-160" y="-352" width="64" height="512"/>
   <object id="58" x="-96" y="-128" width="96" height="288"/>
@@ -297,7 +297,7 @@
   <object id="72" x="0" y="-288" width="64" height="96"/>
   <object id="73" x="-64" y="-352" width="64" height="32"/>
   <object id="74" x="-192" y="416" width="128" height="32"/>
-  <object id="75" x="-160" y="448" width="96" height="32"/>
+  <object id="75" x="-160" y="448" width="256" height="32"/>
   <object id="76" x="-96" y="480" width="352" height="32"/>
   <object id="77" x="-32" y="512" width="256" height="32"/>
   <object id="78" x="96" y="160" width="192" height="320"/>

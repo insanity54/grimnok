@@ -43,8 +43,8 @@
             "scale": 0.75,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 479.33333333333326,
-                "y": -14.666666666666742
+                "x": 1208.6666666666667,
+                "y": 34.66666666666663
             }
         },
         "originCave.tmx#tiles3": {
@@ -103,7 +103,7 @@
                 7
             ],
             "scale": 1,
-            "selectedLayer": 3,
+            "selectedLayer": 4,
             "viewCenter": {
                 "x": 261.5,
                 "y": 247
@@ -112,16 +112,27 @@
         "stoneville.tmx#tiles4": {
             "scaleInDock": 1
         },
+        "stonevilleEast.tmj": {
+            "scale": 0.82939453125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": -0.6028494053927034,
+                "y": 0
+            }
+        },
+        "stonevilleEast.tmj#tiles4": {
+            "scaleInDock": 1
+        },
         "stonevilleEast.tmx": {
             "expandedObjectLayers": [
                 2,
                 4
             ],
-            "scale": 1,
-            "selectedLayer": 2,
+            "scale": 4,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": -566.5,
-                "y": -46
+                "x": -468.625,
+                "y": -55.5
             }
         },
         "stonevilleEast.tmx#tiles4": {
@@ -131,14 +142,14 @@
         },
         "stonevilleEastTunnel.tmx": {
             "expandedObjectLayers": [
-                4,
-                3
+                3,
+                4
             ],
             "scale": 1,
-            "selectedLayer": 1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 48,
-                "y": 144
+                "x": 183.5,
+                "y": 117
             }
         },
         "stonevilleEastTunnel.tmx#tiles4": {
@@ -152,7 +163,7 @@
                 2
             ],
             "scale": 1,
-            "selectedLayer": 2,
+            "selectedLayer": 0,
             "viewCenter": {
                 "x": 341.5,
                 "y": 314
@@ -254,18 +265,18 @@
     "project": "maps.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "stonevilleEast.tmx",
         "originCave.tmx",
         "stoneville.tmx",
-        "stonevilleEast.tmx",
         "stonevilleShop.tmx",
+        "stonevilleShopCellar.tmx",
+        "stonevilleEast.tmj",
         "stonevilleEastTunnel.tmx",
         "sharstoneville.tmx",
         "sharstone.tmx",
         "sharstoneSquare.tmx",
         "townSquare.tmj",
-        "originCave.tmj",
-        "townSquare.tmx",
-        "townSquare.json"
+        "originCave.tmj"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",

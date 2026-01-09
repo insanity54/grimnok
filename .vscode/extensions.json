@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "anseki.vscode-color"
+        "anseki.vscode-color",
+        "pinage404.nix-extension-pack"
     ]
 }

@@ -4,11 +4,11 @@
 
 * [x] [devbox](https://www.jetify.com/docs/devbox/installing-devbox)
 * [x] club penguin style movement
-* [ ] Fantasy RPG
+* [x] Fantasy RPG
 * [ ] Easy to update
 * [ ] Fun to play
 * [ ] Nakama multiplayer
-* [ ] Nostr auth
+* [x] Nostr auth
 * [ ] User accounts
 * [ ] Inventory
 * [ ] Beasts
@@ -64,7 +64,11 @@
   * [ ] Receive Sats for Gol purchases
   * [ ] Receive Sats for beast purchases
 * [ ] Community goal object which lets players burn Gol to advance towards co-op success
-
+* [ ] ASDF spell casting (home row by default)
+* [ ] Custom keybinds
+* [ ] Midair spell collision combinations (a.la Magicka)
+* [ ] Crane game minigame
+* [ ] Fortune teller (cost Gol)
 
 ## Dev
 
@@ -97,8 +101,70 @@ Once nakama is running, go to http://localhost:7351. The default creds are admin
 Adventurer spritesheet by rvros https://rvros.itch.io/animated-pixel-hero
 
 
+### Inspiration
+
+* NeoPets
+* Habbo Hotel
+* Club Penguin
+* Runescape
+* Pokemon
+* Crane Games
+* FlyFF
+* Gai Online
+* Diablo
+* Magicka
+* League of Legends
+* Reconquer Online (dead MMORPG)
+
+
+#### Lessons learned from other games
+
+##### Gaia Online
+
+  * Don't inflate the in-game currency
+  * Don't allow players to buy in-game gold using dollars
+
+##### Reconquer Online
+
+  * Keep the content coming. Players check out when updates are infrequent.
+  * Give the players tools to solve in-game problems/disputes themselves.
+
+##### Magicka
+
+  * It's OK if your game crashes, as long as it's a fun game..
+
+##### Crane Games
+
+  * Failure is part of the experience
+  * The struggle for a thing you want is usually more fun than owning the thing you want
+
+##### Habbo Hotel
+
+  * Communities build themselves
+  * Players crave belongings
+
+##### NeoPets
+
+  * Collecting things is really fun and addicting
+  * A great game emerges from many simple games
+  * Economics is everything
+  * Never lose your password
+
+##### Runescape
+
+  * Never lose your password.
+  * Grindy games aren't bad. They're excellent!
+  * Collecting, player customization, fashion, and socializing are some of the most important game aspects.
+  * 
+
 ### troubleshooting
 
-    .devbox/virenv/postgresql/data" is not a database cluster directory
+    .devbox/virtenv/postgresql/data" is not a database cluster directory
 
 @see https://www.danielcorin.com/til/devbox/quick-postgres-db/
+
+
+### log
+
+* 2026-01-06 implemented pathfinding
+* 2026-01-07 integrate nostr auth with svelte

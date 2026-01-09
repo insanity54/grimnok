@@ -13,18 +13,38 @@
       "runOptions": {
         "runOn": "folderOpen"
       }
-    }, {
+    },
+    {
       "label": "Migrate nakama",
       "type": "shell",
-      "command": "nakama migrate up --config ./.config/nakama.development.yml"
-    }, {
+      "command": "nakama migrate up --config ./.config/nakama.yml",
+      "problemMatcher": [],
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/packages/server"
+      }
+    },
+    {
+      "label": "Run nakama (auto reload when source changes)",
+      "type": "shell",
+      "command": "find . -name '*.ts' | entr -r -s 'tsc && nakama --config ./.config/nakama.yml'",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/packages/server"
+      },
+      "runOptions": { 
+      
+        "runOn": "folderOpen"
+      }
+    },
+    {
       "label": "Run bun dev",
       "type": "shell",
       "command": "bun run dev",
       "problemMatcher": [],
       "isBackground": true,
       "options": {
-        "cwd": "${workspaceFolder}"
+        "cwd": "${workspaceFolder}/packages/app"
       },
       "runOptions": {
         "runOn": "folderOpen"

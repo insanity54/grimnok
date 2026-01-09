@@ -1,4 +1,0 @@
-name: Grimnâk
-database:
-  address:
-    - "nakama@localhost:5432"

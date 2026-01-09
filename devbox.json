@@ -4,7 +4,9 @@
     "postgresql@latest",
     "nakama@latest",
     "python313Packages.livereload@latest",
-    "bun@latest"
+    "bun@latest",
+    "typescript@latest",
+    "entr@latest"
   ],
   "shell": {
     "init_hook": [

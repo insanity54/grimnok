@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "outFile": "./data/modules/index.js"
+  },
+  "include": [
+    "./src/**/*.ts"
+  ],
+  "files": [
+    "./node_modules/nakama-runtime/index.d.ts",
+  ],
+
+}

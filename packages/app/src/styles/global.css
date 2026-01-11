@@ -1,0 +1,53 @@
+    html {
+      color-scheme: light dark;
+    }
+
+    body {
+      font-family: system-ui;
+      font-size: 1.25rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    img,
+    svg,
+    video {
+      max-width: 100%;
+      display: block;
+    }
+
+    main {
+      max-width: min(70ch, 100% - 4rem);
+      margin-inline: auto;
+    }
+
+
+	.button {
+		color: #ecf0f1; /* Text color */
+		font-size: 17px;
+		background-color: #e67e22; /* Default background color */
+		border: 1px solid #f39c12; /* Default border color */
+		border-radius: 5px;
+		cursor: pointer;
+		padding: 10px;
+		transition: all 0.1s;
+		margin: 0 5px;
+		white-space: nowrap; /* Prevent button text from wrapping */
+	}
+
+	/* Button Active State */
+	.button:active {
+		position: relative;
+		top: 2px;
+	}
+
+	/* Color Utility Classes */
+	.button-purple {
+		background-color: #8e44ad; /* Medieval purple */
+		border: 1px solid #733d9d; /* Darker purple */
+	}
+
+	.button-brown {
+		background-color: #50432c; /* Medieval black */
+		border: 1px solid #332a1c; /* Darker black */
+	}

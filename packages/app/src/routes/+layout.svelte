@@ -1,0 +1,13 @@
+<!-- src/routes/+layout.svelte -->
+
+<script lang="ts">
+	import favicon from '$lib/assets/favicon.ico';
+	import '../styles/global.css';
+	let { children } = $props();
+</script>
+
+<svelte:head>
+	<link rel="icon" href={favicon} />
+</svelte:head>
+
+{@render children()}

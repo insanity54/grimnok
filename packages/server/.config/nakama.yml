@@ -1,0 +1,6 @@
+name: Grimnâk
+database:
+  address:
+    - "nakama@localhost:5432"
+runtime:
+  js_entrypoint: "index.js"

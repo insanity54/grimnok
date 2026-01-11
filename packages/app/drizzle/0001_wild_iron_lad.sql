@@ -1,0 +1,1 @@
+ALTER TABLE "nip98_tokens" RENAME COLUMN "user_id" TO "nostr_pubkey";

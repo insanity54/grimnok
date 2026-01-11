@@ -3,10 +3,10 @@
   "packages": [
     "postgresql@latest",
     "nakama@latest",
-    "python313Packages.livereload@latest",
     "bun@latest",
     "typescript@latest",
-    "entr@latest"
+    "entr@latest",
+    "pgadmin4-desktopmode@latest"
   ],
   "shell": {
     "init_hook": [

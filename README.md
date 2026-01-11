@@ -69,6 +69,7 @@
 * [ ] Midair spell collision combinations (a.la Magicka)
 * [ ] Crane game minigame
 * [ ] Fortune teller (cost Gol)
+* [ ] ratelimited packages/app `/api/nip98-token` endpoints
 
 ## Dev
 

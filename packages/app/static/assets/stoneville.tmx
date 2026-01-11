@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="22" height="22" tilewidth="32" tileheight="32" infinite="1" nextlayerid="11" nextobjectid="20">
+ <editorsettings>
+  <export target="stoneville.tmj" format="json"/>
+ </editorsettings>
+ <properties>
+  <property name="lore">Named after an ancient sword embedded in stone in the town square. Nobody has ever been able to pull it from it's clutches.
+
+The legend says that a mighty Gryffin crafted the sword from a shard of it's claw.</property>
+ </properties>
+ <tileset firstgid="1" name="tiles4" tilewidth="32" tileheight="32" tilecount="136" columns="8">
+  <image source="tiles4.png" width="256" height="544"/>
+  <tile id="23">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="1.75" y="25.875">
+     <polygon points="0,0 11.625,-25.875 17.125,-25.875 28.875,0.875 28.5,4.75 0.125,4.75"/>
+    </object>
+   </objectgroup>
+  </tile>
+ </tileset>
+ <layer id="1" name="ground" width="22" height="22">
+  <data encoding="csv">
+   <chunk x="0" y="0" width="16" height="16">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,129,129,129,129,129,129,129,129,129,129,129,129,129,129,
+0,0,129,19,19,19,19,19,19,19,19,19,19,19,19,19,
+0,0,129,20,20,9,9,8,19,19,19,20,20,19,19,19,
+0,0,129,20,9,8,8,8,8,8,8,8,8,20,19,19,
+0,0,129,20,8,8,8,8,8,8,8,8,8,8,8,8,
+0,0,129,20,8,8,8,8,8,8,8,8,8,8,8,8,
+0,0,129,20,8,8,8,8,8,8,8,8,8,8,8,8,
+0,0,10,10,10,10,8,8,8,8,8,8,8,8,8,8,
+0,0,129,20,19,8,8,8,8,8,8,8,8,8,8,8,
+0,0,129,20,20,8,8,8,8,8,8,8,8,8,8,8,
+0,0,129,20,20,8,8,8,8,8,8,8,8,8,8,8,
+0,0,129,20,19,8,8,19,19,19,19,19,19,20,20,20,
+0,0,129,20,19,11,12,21,19,19,19,19,19,20,20,20,
+0,0,129,20,15,15,15,21,19,19,19,19,19,20,20,20
+</chunk>
+   <chunk x="16" y="0" width="16" height="16">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+129,129,129,129,0,0,0,0,0,0,0,0,0,0,0,0,
+19,19,19,129,0,0,0,0,0,0,0,0,0,0,0,0,
+19,20,19,129,0,0,0,0,0,0,0,0,0,0,0,0,
+19,20,19,129,0,0,0,0,0,0,0,0,0,0,0,0,
+20,20,19,129,0,0,0,0,0,0,0,0,0,0,0,0,
+20,20,19,129,0,0,0,0,0,0,0,0,0,0,0,0,
+20,20,19,129,0,0,0,0,0,0,0,0,0,0,0,0,
+20,20,19,129,0,0,0,0,0,0,0,0,0,0,0,0,
+22,20,19,129,0,0,0,0,0,0,0,0,0,0,0,0,
+18,18,19,129,0,0,0,0,0,0,0,0,0,0,0,0,
+8,8,8,100,0,0,0,0,0,0,0,0,0,0,0,0,
+18,18,19,129,0,0,0,0,0,0,0,0,0,0,0,0,
+20,20,19,129,0,0,0,0,0,0,0,0,0,0,0,0,
+20,20,19,129,0,0,0,0,0,0,0,0,0,0,0,0
+</chunk>
+   <chunk x="0" y="16" width="16" height="16">
+0,0,129,20,15,15,15,21,19,19,19,19,19,19,20,20,
+0,0,129,19,15,15,15,21,19,19,19,19,19,19,19,19,
+0,0,129,19,19,19,19,19,19,19,19,19,19,20,19,19,
+0,0,129,129,129,129,129,129,129,129,129,129,129,129,129,129,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</chunk>
+   <chunk x="16" y="16" width="16" height="16">
+20,20,19,129,0,0,0,0,0,0,0,0,0,0,0,0,
+20,20,19,129,0,0,0,0,0,0,0,0,0,0,0,0,
+19,19,19,129,0,0,0,0,0,0,0,0,0,0,0,0,
+129,129,129,129,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</chunk>
+  </data>
+ </layer>
+ <objectgroup id="9" name="poi">
+  <object id="14" name="swordInStone" gid="24" x="288" y="224" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup id="6" name="items">
+  <object id="2" name="mystery" gid="54" x="192" y="224" width="32" height="32"/>
+  <object id="4" name="map" gid="41" x="224" y="160" width="32" height="32"/>
+  <object id="5" gid="93" x="128" y="192" width="32" height="32"/>
+  <object id="7" name="gol" type="money" gid="67" x="192" y="160" width="32" height="32">
+   <properties>
+    <property name="count" type="int" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="10" name="navmesh" visible="0" locked="1">
+  <object id="15" x="96" y="96" width="512" height="512"/>
+  <object id="16" x="608" y="384" width="32" height="32"/>
+  <object id="17" x="64" y="288" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup id="8" name="notes"/>
+ <objectgroup id="7" name="portals">
+  <object id="8" name="originCave" gid="1" x="160" y="192" width="32" height="32">
+   <properties>
+    <property name="toMap" value="originCave"/>
+    <property name="toPortal" value="stair2"/>
+   </properties>
+  </object>
+  <object id="9" name="southStair" gid="2147483679" x="160" y="544" width="32" height="32">
+   <properties>
+    <property name="toMap" value="originCave"/>
+    <property name="toPortal" value="stair1"/>
+   </properties>
+  </object>
+  <object id="10" name="eastGate" gid="28" x="608" y="416" width="32" height="32">
+   <properties>
+    <property name="toMap" value="stonevilleEast"/>
+    <property name="toPortal" value="gate"/>
+   </properties>
+  </object>
+  <object id="11" name="shop" gid="4" x="448" y="256" width="32" height="32">
+   <properties>
+    <property name="toMap" value="stonevilleShop"/>
+    <property name="toPortal" value="door"/>
+   </properties>
+  </object>
+  <object id="19" name="westArch" gid="27" x="160" y="480" width="32" height="32">
+   <properties>
+    <property name="toMap" value="stonevilleWest"/>
+    <property name="toPortal" value="eastArch"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

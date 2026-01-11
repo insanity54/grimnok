@@ -2,9 +2,22 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Run devbox services",
+      "label": "Run tests",
       "type": "shell",
-      "command": "devbox services up",
+      "command": "bash -x test.sh",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/packages/app"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run postgres",
+      "type": "shell",
+      "command": "postgres -k $PGHOST",
       "problemMatcher": [],
       "isBackground": true,
       "options": {
@@ -24,18 +37,28 @@
         "cwd": "${workspaceFolder}/packages/server"
       }
     },
-    {
-      "label": "Run nakama (auto reload when source changes)",
+        {
+      "label": "drizzle studio",
       "type": "shell",
-      "command": "find . -name '*.ts' | entr -r -s 'tsc && nakama --config ./.config/nakama.yml'",
+      "command": "bun run db:studio",
+      "problemMatcher": [],
+      "isBackground": false,
+      "options": {
+        "cwd": "${workspaceFolder}/packages/server"
+      }
+    },
+    {
+      "label": "Run nakama",
+      "type": "shell",
+      "command": "find . -name '*.ts' | entr -r sh -c 'killall nakama; tsc && sleep 1; nakama --config ./.config/nakama.yml --runtime.env ORIGIN=$ORIGIN --runtime.env IPC_SECRET=$IPC_SECRET'",
       "isBackground": true,
       "options": {
         "cwd": "${workspaceFolder}/packages/server"
       },
-      "runOptions": { 
-      
+      "runOptions": {
         "runOn": "folderOpen"
-      }
+      },
+      "problemMatcher": []
     },
     {
       "label": "Run bun dev",

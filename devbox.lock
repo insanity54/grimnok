@@ -157,6 +157,70 @@
         }
       }
     },
+    "pgadmin4-desktopmode@latest": {
+      "last_modified": "2025-12-31T03:27:36Z",
+      "resolved": "github:NixOS/nixpkgs/f665af0cdb70ed27e1bd8f9fdfecaf451260fc55#pgadmin4-desktopmode",
+      "source": "devbox-search",
+      "version": "9.11",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/skj5nfxxvxn72wrcbd5w1jqidl53ayk3-pgadmin-9.11",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/sh25hqrd7fgh874mz4x05bw9w7mg7272-pgadmin-9.11-dist"
+            }
+          ],
+          "store_path": "/nix/store/skj5nfxxvxn72wrcbd5w1jqidl53ayk3-pgadmin-9.11"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/5i0zk90m839s35hh7fh50wzmhhgd61rn-pgadmin-9.11",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/j4201fjz5qxfbhs52whgrr135ipdrhi2-pgadmin-9.11-dist"
+            }
+          ],
+          "store_path": "/nix/store/5i0zk90m839s35hh7fh50wzmhhgd61rn-pgadmin-9.11"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/9almv4grz2aidx7n1h2viqy9wz4y6qfn-pgadmin-9.11",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/xc0g91kvmh35zyqjr9ms3l76d31q20hr-pgadmin-9.11-dist"
+            }
+          ],
+          "store_path": "/nix/store/9almv4grz2aidx7n1h2viqy9wz4y6qfn-pgadmin-9.11"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/xfwz06x0smrqq9sqaf46sfd415cbfib8-pgadmin-9.11",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/g4x71kl6byw9lysdd8ykprlmnrhdgr3h-pgadmin-9.11-dist"
+            }
+          ],
+          "store_path": "/nix/store/xfwz06x0smrqq9sqaf46sfd415cbfib8-pgadmin-9.11"
+        }
+      }
+    },
     "postgresql@latest": {
       "last_modified": "2025-12-29T16:45:58Z",
       "plugin_version": "0.0.2",
@@ -343,70 +407,6 @@
             }
           ],
           "store_path": "/nix/store/hkhbalgmx1669niw8jg648vbqs3mdxkv-postgresql-17.7"
-        }
-      }
-    },
-    "python313Packages.livereload@latest": {
-      "last_modified": "2025-11-23T21:50:36Z",
-      "resolved": "github:NixOS/nixpkgs/ee09932cedcef15aaf476f9343d1dea2cb77e261#python313Packages.livereload",
-      "source": "devbox-search",
-      "version": "2.7.1",
-      "systems": {
-        "aarch64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/rdyhy2przrd5dvwnhrls91khnc7xm3pw-python3.13-livereload-2.7.1",
-              "default": true
-            },
-            {
-              "name": "dist",
-              "path": "/nix/store/dnbj4krbpqvwkraishp8qljghzqsjwcv-python3.13-livereload-2.7.1-dist"
-            }
-          ],
-          "store_path": "/nix/store/rdyhy2przrd5dvwnhrls91khnc7xm3pw-python3.13-livereload-2.7.1"
-        },
-        "aarch64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/jaw2si5w3z7zsr9hczylgmw6wm0nrn5w-python3.13-livereload-2.7.1",
-              "default": true
-            },
-            {
-              "name": "dist",
-              "path": "/nix/store/xanmwsf8sblbvxsn81l7d07sr8vkswq5-python3.13-livereload-2.7.1-dist"
-            }
-          ],
-          "store_path": "/nix/store/jaw2si5w3z7zsr9hczylgmw6wm0nrn5w-python3.13-livereload-2.7.1"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/ipzpdks3r8isp2wx4kbp5hm3hrvkgliv-python3.13-livereload-2.7.1",
-              "default": true
-            },
-            {
-              "name": "dist",
-              "path": "/nix/store/n6vsc5sy4lv2g7vfgacrklwmrg0vnppb-python3.13-livereload-2.7.1-dist"
-            }
-          ],
-          "store_path": "/nix/store/ipzpdks3r8isp2wx4kbp5hm3hrvkgliv-python3.13-livereload-2.7.1"
-        },
-        "x86_64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/09aw33m97k373ryp7bg88m7gnc4mzh7k-python3.13-livereload-2.7.1",
-              "default": true
-            },
-            {
-              "name": "dist",
-              "path": "/nix/store/9br7xjxzg7b90fqq3rs3hwg578c8plc8-python3.13-livereload-2.7.1-dist"
-            }
-          ],
-          "store_path": "/nix/store/09aw33m97k373ryp7bg88m7gnc4mzh7k-python3.13-livereload-2.7.1"
         }
       }
     },

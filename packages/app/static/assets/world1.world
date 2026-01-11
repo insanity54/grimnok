@@ -1,0 +1,55 @@
+{
+    "maps": [
+        {
+            "fileName": "originCave.tmx",
+            "height": 1536,
+            "width": 1536,
+            "x": 0,
+            "y": -512
+        },
+        {
+            "fileName": "townSquare.tmx",
+            "height": 512,
+            "width": 512,
+            "x": -352,
+            "y": -960
+        },
+        {
+            "fileName": "sharstoneville.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 160,
+            "y": -960
+        },
+        {
+            "fileName": "stoneville.tmx",
+            "height": 1024,
+            "width": 1024,
+            "x": 160,
+            "y": -960
+        },
+        {
+            "fileName": "stonevilleEast.tmx",
+            "height": 1024,
+            "width": 1024,
+            "x": 1248,
+            "y": -448
+        },
+        {
+            "fileName": "stonevilleWest.tmx",
+            "height": 768,
+            "width": 800,
+            "x": -544,
+            "y": -928
+        },
+        {
+            "fileName": "stonevilleWestCellar.tmx",
+            "height": 1120,
+            "width": 640,
+            "x": -544,
+            "y": -320
+        }
+    ],
+    "onlyShowAdjacentMaps": false,
+    "type": "world"
+}

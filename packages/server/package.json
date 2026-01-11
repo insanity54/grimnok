@@ -1,0 +1,17 @@
+{
+  "name": "src-nakama-modules",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "nakama-runtime": "https://github.com/heroiclabs/nakama-common"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon --watch src --ext ts --exec \"npm run build\""
+  }
+}

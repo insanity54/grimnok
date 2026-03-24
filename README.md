@@ -1,6 +1,6 @@
 # The adventures of Grimnâk
 
-[![Grimnok WIP](https://github.com/insanity54/grimnok/raw/refs/heads/main/grimnok-wip.mp4)](https://github.com/insanity54/grimnok/raw/refs/heads/main/grimnok-wip.mp4)
+https://github.com/user-attachments/assets/d0e6d5c2-2116-4538-903c-e41b0745ce06
 
 ## Project requirements
 

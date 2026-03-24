@@ -1,5 +1,7 @@
 # The adventures of Grimnâk
 
+[![Grimnok WIP](https://github.com/insanity54/grimnok/raw/refs/heads/main/grimnok-wip.mp4)](https://github.com/insanity54/grimnok/raw/refs/heads/main/grimnok-wip.mp4)
+
 ## Project requirements
 
 * [x] [devbox](https://www.jetify.com/docs/devbox/installing-devbox)
